@@ -1,4 +1,4 @@
-package npc;
+package juego;
 
 public class Character {
 	private int ataque;

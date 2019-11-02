@@ -1,4 +1,4 @@
-package npc;
+package juego;
 
 public class Golpeador extends Character{
 
