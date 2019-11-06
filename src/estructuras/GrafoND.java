@@ -36,7 +36,21 @@ public class GrafoND<T> {
 	}
 	
 	public void MST() {
-		
+		Vector<Arco<T>> mts = new Vector<>();
+		Arco tempArc;
+		for(int pos = 0; pos<arcos.size();pos++) {
+			tempArc = arcos.get(pos);
+			if(!tempArc.getPuntoA().isVisitado() && !tempArc.getPuntoB().isVisitado()) {
+				mts.add(tempArc);
+				tempArc.getPuntoA().setVisitado(true);
+				tempArc.getPuntoB().setVisitado(true);
+			}else if(!tempArc.getPuntoA().isVisitado() || !tempArc.getPuntoB().isVisitado()) {
+				mts.add(tempArc);
+				tempArc.getPuntoA().setVisitado(true);
+				tempArc.getPuntoB().setVisitado(true);
+			}
+			
+		}
 	}
 	
 	public void dijkstra() {
