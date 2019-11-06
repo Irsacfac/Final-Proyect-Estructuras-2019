@@ -8,17 +8,20 @@ public class NodoG <T>{
 	private int peso;
 	private Vector<NodoG<T>> arcos;
 	
-	public NodoG(){
+	public NodoG(T pElemento){
+		elemento = pElemento;
 		arcos = new Vector<>();
 	}
 	
-	public void agregarArco(NodoG<T> pNodo) {
+	public boolean agregarArco(NodoG<T> pNodo) {
 		if(!arcos.contains(pNodo)) {
 			arcos.add(pNodo);
 			if(!pNodo.getArcos().contains(this)) {
 				pNodo.getArcos().add(this);
 			}
-			
+			return true;
+		}else {
+			return false;
 		}
 	}
 	
