@@ -8,12 +8,13 @@
 +Hilos de ejecución
 +Login y serializacion
 +Jugabilidad
-	-Que se ataquen
-	-Que avancen
-	-Poner la bandera
-	-Darle inicio al juego
-	-Ganar, Perder, Empatar
-	-Reiniciar el juego 
+	a)Que se ataquen
+
+	b)Que avancen
+	c)Poner la bandera
+	d)Darle inicio al juego
+	e)Ganar, Perder, Empatar
+	f)Reiniciar el juego 
 	
 +GUI
 	-observer
@@ -23,4 +24,44 @@
 	-Logout
 	-Cargar usuario
 	-Ver puntuaciones
+
+
+Fase1: (Estructura del proyecto) Domingo 17
++Personajes
++Estructura
++Mapa
+	*obstaculos
++Jugadores
++Executor
++Jugabilidad puntos del b al f
++GUI primitiva
+	*Menu
+	*Login
+	
+
+Fase2: (Multijugador) Martes 19
++Jugabilidad punto a
++Cliente servidor
++Hilos de ejecucion
++Creación y verificación de jugadores
++Serialización
++Ponerle lo del puntaje a la gui primitiva
+
+
+
+Fase3: (GUI) Jueves 21
++Puntaje jugador
++Menus
++observer
+
+
+
+Dudas:
+-Relación nodos-tablero
+	*Tamaño fijo
+	*Rangos
+-Direcciones, 8 o 4
+
+
+
 	 
