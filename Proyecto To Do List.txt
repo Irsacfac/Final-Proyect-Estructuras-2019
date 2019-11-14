@@ -27,32 +27,30 @@
 
 
 Fase1: (Estructura del proyecto) Domingo 17
-+Personajes
-+Estructura
-+Mapa
-	*obstaculos
-+Jugadores
-+Executor
-+Jugabilidad puntos del b al f
-+GUI primitiva
++Personajes Ambos
++Estructura Ambos
++Mapa J
+  *obstaculos
++Jugadores Ambos 
++Executor I
++GUI primitiva (b al f) Ambos
 	*Menu
 	*Login
 	
 
 Fase2: (Multijugador) Martes 19
-+Jugabilidad punto a
-+Cliente servidor
-+Hilos de ejecucion
-+Creación y verificación de jugadores
-+Serialización
-+Ponerle lo del puntaje a la gui primitiva
++Cliente servidor Ambos
++Hilos de ejecucion I
++Creación y verificación de jugadores Ambos
++Serialización J
++Jugabilidad punto a ...
++Ponerle lo del puntaje a la gui primitiva ...
 
 
 
 Fase3: (GUI) Jueves 21
-+Puntaje jugador
-+Menus
-+observer
++observer Ambos
++Hacerlo lindo Ambos
 
 
 
