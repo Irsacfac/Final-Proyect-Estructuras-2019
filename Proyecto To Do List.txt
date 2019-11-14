@@ -1,0 +1,26 @@
++Estructura(Algoritmos de recorridos)
++Personajes con todas sus características 
+	-strategy
++Cargar el mapa 
+	-json handler
++Generación del mapa lógico con obstáculos(grafo)
++Cliente servidor
++Hilos de ejecución
++Login y serializacion
++Jugabilidad
+	-Que se ataquen
+	-Que avancen
+	-Poner la bandera
+	-Darle inicio al juego
+	-Ganar, Perder, Empatar
+	-Reiniciar el juego 
+	
++GUI
+	-observer
+	-Mapa
+	-Menus
+	-Login
+	-Logout
+	-Cargar usuario
+	-Ver puntuaciones
+	 
