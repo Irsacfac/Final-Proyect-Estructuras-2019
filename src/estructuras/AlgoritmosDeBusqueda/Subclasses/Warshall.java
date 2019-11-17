@@ -5,7 +5,6 @@ import estructuras.Arco;
 import estructuras.GrafoND;
 import estructuras.NodoG;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Warshall<T> extends AlgoritmoDeBusqueda {
@@ -15,15 +14,30 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
         return null;
     }
 
-    public ArrayList<NodoG<T>> algoritmoWarshall(GrafoND<T> pGrafo){
-        return null;
+    public ArrayList<NodoG<T>> algoritmoWarshall(GrafoND<T> pGrafo, NodoG<T> pNodoA, NodoG<T> pNodoB){
+
+
+
     }
 
-    private boolean connectionExists(int i, int j, GrafoND<T> pGrafo){
-        //Determina el nodo en la posicion i y j de la lista de adyacencia del  grafo.
-        //Busca al elemento de indice j en el array de conexiones del elemento de indice i.
-        //Devuelve el valor de verdad de lo anterior.
+    private ArrayList<ElementoDeMatriz<T>> generarP0(GrafoND<T> pGrafo  ){
+
+    }
+
+    private boolean existeConexion(int i, int j, GrafoND<T> pGrafo){
         return pGrafo.getNodos().get(i).getArcos().contains(pGrafo.getNodos().get(j));
+    }
+
+    private Arco<T> getConexion(int i, int j, GrafoND<T> pGrafo){
+        ArrayList<Arco<T>> conexiones = pGrafo.getArcos();
+        NodoG<T> nodoA = pGrafo.getNodos().get(i);
+        NodoG<T> nodoB = pGrafo.getNodos().get(j);
+        for (Arco<T> conexion : conexiones){
+            if (conexion.getPuntoA() == nodoA && conexion.getPuntoB() == nodoB){
+                return conexion;
+            }
+        }
+        return null;
     }
 
 

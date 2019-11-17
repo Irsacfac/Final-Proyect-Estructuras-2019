@@ -6,18 +6,18 @@ import estructuras.GrafoND;
 import estructuras.NodoG;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class MST<T> extends AlgoritmoDeBusqueda {
 
     @Override
     public  ArrayList<NodoG<T>>  getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
-        return null;
+        ArrayList resultado = algoritmoMST(pGrafo);
+        return getPath(resultado, pInicio, pDestino);
     }
 
-    public ArrayList<Arco<T>> algoritmoMST(GrafoND<T> pGrafo) {
+    private ArrayList<Arco<T>> algoritmoMST(GrafoND<T> pGrafo) {
         ArrayList<Arco<T>> mts = new ArrayList<>();
-        Arco tempArc;
+        Arco<T> tempArc;
         for(int pos = 0; pos < pGrafo.getArcos().size(); pos++) {
             tempArc = pGrafo.getArcos().get(pos);
             if(!tempArc.getPuntoA().isVisitado() && !tempArc.getPuntoB().isVisitado()) {
@@ -33,18 +33,18 @@ public class MST<T> extends AlgoritmoDeBusqueda {
         return mts;
     }
 
-    public ArrayList<Arco<T>> ordenarResultado(ArrayList<Arco<T>> arcosDesordenados){
-        ArrayList<Arco<T>> arcosOrdenados = new ArrayList<>();
-        for (Arco<T> arco : arcosDesordenados){
-
-            if (arcosOrdenados == null){
-
+    private ArrayList<NodoG<T>> getPath(ArrayList<Arco<T>> pAlgoritmoMST, NodoG<T> pNodoA, NodoG<T> pNodoB){
+        ArrayList<NodoG<T>> path = new ArrayList<>();
+        NodoG<T> nodoActual = pNodoA;
+        for (int index = 0 ; index < pAlgoritmoMST.size() ; index++){
+            if (pAlgoritmoMST.get(index).getPuntoA() == nodoActual && !path.contains(pAlgoritmoMST.get(index).getPuntoA())){
+                path.add(pAlgoritmoMST.get(index).getPuntoA());
+                nodoActual = pAlgoritmoMST.get(index).getPuntoB();
+                index = 0;
             }
-
+            if (nodoActual == pNodoB) break;
         }
-        return arcosOrdenados;
+        return path;
     }
-
-
 
 }
