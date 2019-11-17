@@ -1,4 +1,4 @@
-package Otros;
+package otros;
 
 public interface IConstants {
 

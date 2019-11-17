@@ -27,11 +27,11 @@
 
 
 Fase1: (Estructura del proyecto) Domingo 17
-+Personajes Ambos
++Personajes Ambos (listo?)
 +Estructura Ambos
 +Mapa J
   *obstaculos
-+Jugadores Ambos 
++Jugadores Ambos (listo?)
 +Executor I
 +GUI primitiva (b al f) Ambos
 	*Menu
