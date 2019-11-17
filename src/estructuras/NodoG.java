@@ -29,7 +29,7 @@ public class NodoG <T>{
 		return arcos;
 	}
 	
-	protected void setVisitado(boolean pVisitado) {
+	public void setVisitado(boolean pVisitado) {
 		visitado = pVisitado;
 	}
 	

@@ -1,13 +1,16 @@
 package estructuras;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class GrafoND<T> {
-	private Vector<NodoG<T>> nodos;
-	private Vector<Arco<T>> arcos; 
-	
+	private ArrayList<NodoG<T>> nodos;
+	private ArrayList<Arco<T>> arcos;
+	private T Object;
+
+
+
 	public GrafoND() {
-		nodos = new Vector<>();
+		nodos = new ArrayList<>();
 	}
 	
 	public void agregarNodo(NodoG<T> pNodo) {
@@ -26,34 +29,19 @@ public class GrafoND<T> {
 			}
 		}
 	}
-	
-	public void warshall() {
-		
+
+	public ArrayList<NodoG<T>> getNodos() {
+		return nodos;
 	}
-	
-	public void floyd() {
-		
+
+	public ArrayList<Arco<T>> getArcos() {
+		return arcos;
 	}
-	
-	public void MST() {
-		Vector<Arco<T>> mts = new Vector<>();
-		Arco tempArc;
-		for(int pos = 0; pos<arcos.size();pos++) {
-			tempArc = arcos.get(pos);
-			if(!tempArc.getPuntoA().isVisitado() && !tempArc.getPuntoB().isVisitado()) {
-				mts.add(tempArc);
-				tempArc.getPuntoA().setVisitado(true);
-				tempArc.getPuntoB().setVisitado(true);
-			}else if(!tempArc.getPuntoA().isVisitado() || !tempArc.getPuntoB().isVisitado()) {
-				mts.add(tempArc);
-				tempArc.getPuntoA().setVisitado(true);
-				tempArc.getPuntoB().setVisitado(true);
-			}
-			
-		}
+	public T getObject() {
+		return Object;
 	}
-	
-	public void dijkstra() {
-		
+
+	public void setObject(T object) {
+		Object = object;
 	}
 }
