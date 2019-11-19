@@ -24,13 +24,34 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	}
 	
 	private void arcosDirectos() {
-		while(tablaHash.containsKey(ruta)) {
-			
+		NodoG<T> nodoActual;
+		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
+			nodoActual = grafo.getNodos().get(posNodo);
+			for(int conecciones = 0; conecciones < nodoActual.getArcos().size(); conecciones++) {
+				tablaHash.put(new ElementoDeMatriz<>(nodoActual, nodoActual.getArcos().get(conecciones)), null);
+				if(tablaHash.containsKey(ruta)) {
+					return;
+				}
+			}
 		}
 	}
 	
 	private void buscarElemento() {
-		while(tablaHash.containsKey(ruta)) {
+		NodoG<T> nodoActual;
+		ElementoDeMatriz<T> origenActual;
+		ElementoDeMatriz<T> actualDestino;
+		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
+			nodoActual = grafo.getNodos().get(posNodo);
+			for(int arcoActual = 0; arcoActual< nodoActual.getArcos().size();arcoActual++) {
+				origenActual = new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoActual);
+				actualDestino = new ElementoDeMatriz<>(nodoActual, ruta.getNodoDestino());
+				if(tablaHash.containsKey(origenActual) && tablaHash.containsKey(actualDestino)) {
+					tablaHash.put(ruta, nodoActual);
+				}
+				if(tablaHash.containsKey(ruta)) {
+					return;
+				}
+			}
 			
 		}
 	}
