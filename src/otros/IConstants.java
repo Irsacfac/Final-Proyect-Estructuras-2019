@@ -20,4 +20,5 @@ public interface IConstants {
 
 
 
+	public static int CANT_HILOS = 5;
 }
