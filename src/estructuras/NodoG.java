@@ -1,5 +1,6 @@
 package estructuras;
 
+import java.util.UUID;
 import java.util.Vector;
 
 public class NodoG <T>{
@@ -7,10 +8,12 @@ public class NodoG <T>{
 	private boolean visitado;
 	private int peso;
 	private Vector<NodoG<T>> arcos;
+	private UUID id;
 	
 	public NodoG(T pElemento){
 		elemento = pElemento;
 		arcos = new Vector<>();
+		id = UUID.randomUUID();
 	}
 	
 	public boolean agregarArco(NodoG<T> pNodo) {

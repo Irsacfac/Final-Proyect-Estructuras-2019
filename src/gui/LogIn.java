@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javafx.scene.paint.Color;
 import otros.IConstants;
 
 public class LogIn extends JFrame implements IConstants{

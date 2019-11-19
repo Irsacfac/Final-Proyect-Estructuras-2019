@@ -1,23 +1,18 @@
+import MapHandling.Casilla;
+import MapHandling.Mapa;
+import estructuras.Arco;
+import estructuras.NodoG;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class Pruebas {
     public static void main(String[] args) {
-//        ArrayList<Integer> hola = new ArrayList<>();
-//        hola.add(0);
-//        hola.add(1);
-//        hola.add(2);
-//        hola.add(3);
-//        hola.add(4);
-//        hola.add(5);
-//        for (int i = 0; i<hola.size();i++){
-//            System.out.println(hola.get(i));
-//
-//        }
-//        Collections.reverse(hola);
-//        for (int i = 0; i<hola.size();i++){
-//            System.out.println(hola.get(i));
-//        }
-
+        Mapa map = new Mapa("C:\\Users\\jguty\\OneDrive\\Documents\\GitHub\\Final-Proyect-Estructuras-2019\\src\\MapHandling\\Mapas\\mapa2.json");
+        for (Arco<Casilla> arco : map.getMapa().getArcos()){
+            System.out.println(arco.getPuntoA().getElemento().getFila() + "," + arco.getPuntoA().getElemento().getColumna() + "//" + arco.getPuntoB().getElemento().getFila() + "," + arco.getPuntoB().getElemento().getColumna());
+        }
     }
 }
+

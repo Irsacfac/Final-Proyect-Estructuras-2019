@@ -3,10 +3,21 @@ package otros;
 public interface IConstants {
 	public static int PANTALLA_ANCHURA = 350;
 	public static int PANTALLA_ALTURA = 450;
-	public static int PANTALLA_JUEGO_ANCHURA = 1000;
-	public static int PANTALLA_JUEGO_ALTURA = 800;
+	public static int PANTALLA_JUEGO_ANCHURA = 1020;
+	public static int PANTALLA_JUEGO_ALTURA = 805;
 	public static int DEFAULT_BUTTON_ANCHURA = 125;
 	public static int DEFAULT_BUTTON_ALTURA = 30;
 	public static int TEXTLABEL_ANCHURA = (PANTALLA_ANCHURA*80)/100;
 	public static int X_TEXTLABEL = TEXTLABEL_ANCHURA/8;
+	public static int CANTIDAD_NODOS_ANCHURA = 60;
+	public static int CANTIDAD_NODOS_ALTURA = 23;
+	int ALTURA_CASILLA =  PANTALLA_JUEGO_ALTURA / CANTIDAD_NODOS_ALTURA;
+	int ANCHO_CASILLA = PANTALLA_JUEGO_ANCHURA / CANTIDAD_NODOS_ANCHURA;
+	int FILA_CENTRAL = ( CANTIDAD_NODOS_ALTURA / 2 );
+	int AREA_CASILLA = ALTURA_CASILLA * ANCHO_CASILLA;
+
+
+
+
+
 }

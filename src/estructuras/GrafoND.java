@@ -41,6 +41,14 @@ public class GrafoND<T> {
 		return Object;
 	}
 
+	public void setNodos(ArrayList<NodoG<T>> nodos) {
+		this.nodos = nodos;
+	}
+
+	public void setArcos(ArrayList<Arco<T>> arcos) {
+		this.arcos = arcos;
+	}
+
 	public void setObject(T object) {
 		Object = object;
 	}
