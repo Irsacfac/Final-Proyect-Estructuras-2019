@@ -11,5 +11,6 @@ public class Hilos {
 	}
 	
 	public void ejecutar(Runnable comando) {
-		executor.execute(comando);	}
+		executor.execute(comando);	
+	}
 }
