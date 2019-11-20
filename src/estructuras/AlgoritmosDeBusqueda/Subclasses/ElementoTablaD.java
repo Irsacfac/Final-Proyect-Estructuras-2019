@@ -2,13 +2,13 @@ package estructuras.AlgoritmosDeBusqueda.Subclasses;
 
 import estructuras.NodoG;
 
-public class ElementoTablaD<T> {
+public class ElementoTablaD {
 
     private int pesoAcumulado;
-    private NodoG<T> origen;
-    private NodoG<T> nodoActual;
+    private NodoG origen;
+    private NodoG nodoActual;
 
-    public ElementoTablaD(int pPesoAcumulado, NodoG<T> pOrigen, NodoG<T> pNodoActual) {
+    public ElementoTablaD(int pPesoAcumulado, NodoG pOrigen, NodoG pNodoActual) {
         this.pesoAcumulado = pPesoAcumulado;
         this.origen = pOrigen;
         this.nodoActual = pNodoActual;
@@ -18,11 +18,11 @@ public class ElementoTablaD<T> {
         this.pesoAcumulado = pesoAcumulado;
     }
 
-    public void setOrigen(NodoG<T> origen) {
+    public void setOrigen(NodoG origen) {
         this.origen = origen;
     }
 
-    public void setNodoActual(NodoG<T> nodoActual) {
+    public void setNodoActual(NodoG nodoActual) {
         this.nodoActual = nodoActual;
     }
 
@@ -30,11 +30,11 @@ public class ElementoTablaD<T> {
         return pesoAcumulado;
     }
 
-    public NodoG<T> getOrigen() {
+    public NodoG getOrigen() {
         return origen;
     }
 
-    public NodoG<T> getNodoActual() {
+    public NodoG getNodoActual() {
         return nodoActual;
     }
 

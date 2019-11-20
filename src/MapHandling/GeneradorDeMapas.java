@@ -12,9 +12,11 @@ import java.util.ArrayList;
 public class GeneradorDeMapas implements IConstants {
 
     private JSONObject jsonMap;
+    private GrafoND<Casilla> generatingMap;
 
     public GeneradorDeMapas(String jsonMapPath){
         this.jsonMap = JSONReader.getInstance().parseJson(jsonMapPath);
+        generateMap();
     }
 
     public ArrayList<Obstaculo> getObstacles(){
@@ -32,38 +34,32 @@ public class GeneradorDeMapas implements IConstants {
         return obstacles;
     }
 
-    public GrafoND<Casilla> generateMap(){
-        GrafoND<Casilla> graph = new GrafoND<>();
-        ArrayList<NodoG<Casilla>> nodes = generateNodes();
-        graph.setNodos(nodes);
-        ArrayList<Arco<Casilla>> arcs = generateArcs(nodes);
-        graph.setArcos(arcs);
-        return graph;
+    public void generateMap() {
+        generatingMap = new GrafoND<>();
+        generateNodes();
+        generateArcs();
     }
 
-    private ArrayList<NodoG<Casilla>> generateNodes(){
+    private void generateNodes(){
         ArrayList<NodoG<Casilla>> newNodes = new ArrayList<>();
         for (int columnNumber = 1 ; columnNumber < CANTIDAD_NODOS_ANCHURA - 1; columnNumber++)
             for (int rowNumber = 0 ; rowNumber < CANTIDAD_NODOS_ALTURA ; rowNumber++){
                 Casilla newGrid = new Casilla(rowNumber, columnNumber);
                 NodoG<Casilla> newNode = new NodoG<>(newGrid);
-                if(isAValidNode(newNode)) newNodes.add(newNode);
+                if(isAValidNode(newNode)) generatingMap.agregarNodo(newNode);
             }
-        newNodes.addAll(flagGoals());
-        return newNodes;
+        flagGoals();
     }
-    private ArrayList<Arco<Casilla>> generateArcs(ArrayList<NodoG<Casilla>> pNodes){
-        ArrayList<Arco<Casilla>> arcs = new ArrayList<>();
-        for (NodoG<Casilla> node : pNodes)
-            for (NodoG<Casilla> otherNode : pNodes){
+    private void generateArcs(){
+        ArrayList<NodoG<Casilla>> nodes = generatingMap.getNodos();
+        for (NodoG<Casilla> node : nodes)
+            for (NodoG<Casilla> otherNode : nodes){
                 if (isAdjacent(node, otherNode)){
                     node.agregarArco(otherNode);
                     otherNode.agregarArco(node);
-                    Arco<Casilla> newArc = new Arco<>(1,node,otherNode);
-                    arcs.add(newArc);
+                    generatingMap.agregarArco(1,node,otherNode);
                 }
             }
-        return arcs;
     }
     private boolean isAdjacent(NodoG<Casilla> pNodeA, NodoG<Casilla> pNodeB){
         boolean adjacent = false;
@@ -74,14 +70,13 @@ public class GeneradorDeMapas implements IConstants {
             if (pNodeB.getElemento().getColumna() == pNodeA.getElemento().getColumna() + 1) adjacent = true;
         return adjacent;
     }
-    private ArrayList<NodoG<Casilla>> flagGoals(){
-        ArrayList<NodoG<Casilla>> flagGoals = new ArrayList<>();
+    private void flagGoals(){
         ArrayList<Casilla> reservedGrids = generateFlagGrids();
         for (Casilla grid : reservedGrids){
             NodoG<Casilla> newNode = new NodoG<>(grid);
-            flagGoals.add(newNode);
+            generatingMap.agregarNodo(newNode);
         }
-        return flagGoals;
+
     }
     private ArrayList<Casilla> generateFlagGrids(){
         ArrayList<Casilla> flagGrids = new ArrayList<>();
@@ -124,10 +119,7 @@ public class GeneradorDeMapas implements IConstants {
     }
 
 
-
-
-
-
-
-
+    public GrafoND<Casilla> getGeneratingMap() {
+        return generatingMap;
+    }
 }

@@ -5,86 +5,102 @@ import estructuras.Arco;
 import estructuras.GrafoND;
 import estructuras.NodoG;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Vector;
 
-public class Dijkstra<T> extends AlgoritmoDeBusqueda {
+public class Dijkstra extends AlgoritmoDeBusqueda {
+
+    public ArrayList<ElementoTablaD> tablaD;
+
+    public Dijkstra(NodoG pInicio, GrafoND pGrafo) {
+        algoritmoDijkstra(pGrafo, pInicio);
+    }
 
     @Override
-    public  ArrayList<NodoG<T>>  getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
-        ArrayList<ElementoTablaD<T>> dijkstraResult = algoritmoDijkstra(pGrafo, pInicio);
-        ArrayList<NodoG<T>> path = new ArrayList<>();
-        NodoG<T> origen;
-        NodoG<T> actual = getElementoTablaD(pDestino, dijkstraResult).getNodoActual();
-        while (actual != pInicio){
-            ElementoTablaD<T> elementoActual = getElementoTablaD(actual,  dijkstraResult);
+    public  ArrayList<NodoG>  getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
+        ArrayList<NodoG> path = new ArrayList<>();
+        NodoG origen;
+        NodoG actual = pDestino;
+        while(actual != pInicio){
+            ElementoTablaD elementoActual = getElementoTablaD(actual);
+
             path.add(elementoActual.getNodoActual());
             origen = elementoActual.getOrigen();
             actual = origen;
+
         }
         Collections.reverse(path);
         return path;
     }
 
-    public ArrayList<ElementoTablaD<T>> algoritmoDijkstra(GrafoND<T> pGrafo, NodoG<T> pInicio) {
-        ArrayList<ElementoTablaD<T>> tablaD = crearTablaDInicial(pGrafo, pInicio);
-        ArrayList<NodoG<T>> nodos = pGrafo.getNodos();
-        ArrayList<NodoG<T>> arrayF = new ArrayList<>();
+    public void algoritmoDijkstra(GrafoND pGrafo, NodoG pInicio) {
+        crearTablaDInicial(pGrafo, pInicio);
+        ArrayList nodos = pGrafo.getNodos();
+        ArrayList<NodoG> arrayF = new ArrayList<>();
         while (arrayF.size() < nodos.size()){
-            ElementoTablaD<T> nodoAnalizandose = getMenorPesoAcumulado(tablaD, arrayF);
-            tablaD  = actualizarTabla(pGrafo, nodoAnalizandose, tablaD);
+            ElementoTablaD nodoAnalizandose = getMenorPesoAcumulado(arrayF);
+            actualizarTabla(pGrafo, nodoAnalizandose);
             arrayF.add(nodoAnalizandose.getNodoActual());
         }
-
-        return tablaD;
-
     }
 
-    public ElementoTablaD<T> getMenorPesoAcumulado(ArrayList<ElementoTablaD<T>> pTablaD, ArrayList<NodoG<T>> pArrayF){
-        int menorPesoAcumulado = Integer.MAX_VALUE;
-        ElementoTablaD<T> elementoConMenorPeso;
-        elementoConMenorPeso = new ElementoTablaD<T>(menorPesoAcumulado, null, null);
-        for (ElementoTablaD<T> elementoTablaD:pTablaD){
-            if (elementoTablaD.getPesoAcumulado()<=menorPesoAcumulado && !pArrayF.contains(elementoTablaD.getNodoActual())) {
-                menorPesoAcumulado = elementoTablaD.getPesoAcumulado();
-                elementoConMenorPeso = elementoTablaD;
+    public ElementoTablaD getMenorPesoAcumulado(ArrayList<NodoG> pArrayF){
+        int menorPesoAcumulado = 0;
+        ElementoTablaD elementoConMenorPeso = null;
+        for (ElementoTablaD elementoTablaD : tablaD){
+            if (!pArrayF.contains(elementoTablaD.getNodoActual()))
+            {
+                if(elementoConMenorPeso == null)
+                {
+                    elementoConMenorPeso = elementoTablaD;
+                    menorPesoAcumulado = elementoConMenorPeso.getPesoAcumulado();
+                }
+                else if (elementoTablaD.getPesoAcumulado() <= menorPesoAcumulado)
+                {
+                    menorPesoAcumulado = elementoTablaD.getPesoAcumulado();
+                    elementoConMenorPeso = elementoTablaD;
+                }
             }
+
 
         }
         return elementoConMenorPeso;
+
     }
+    
+    public void actualizarTabla(GrafoND pGrafo, ElementoTablaD pElementoAnalizandose){
 
-
-    private ArrayList<ElementoTablaD<T>> actualizarTabla(GrafoND<T> pGrafo, ElementoTablaD<T> pNodoAnalizandose, ArrayList<ElementoTablaD<T>> tablaD){
-
-        for (ElementoTablaD<T> elementoTablaD : tablaD){
-        if (pNodoAnalizandose.getNodoActual().getArcos().contains(elementoTablaD.getNodoActual()))
-            if(pNodoAnalizandose.getPesoAcumulado() + getPesoDeUnArco(pGrafo, pNodoAnalizandose.getNodoActual(), elementoTablaD.getNodoActual()) < elementoTablaD.getPesoAcumulado()){
-                elementoTablaD.setPesoAcumulado(pNodoAnalizandose.getPesoAcumulado()+elementoTablaD.getPesoAcumulado());
-            }
-    }
-        return tablaD;
-}
-
-    private ArrayList<ElementoTablaD<T>> crearTablaDInicial(GrafoND<T> pGrafo, NodoG<T> pInicio){
-        ArrayList<ElementoTablaD<T>> tablaD = new ArrayList<>();
-        for (NodoG<T> nodo : pGrafo.getNodos() ){
-            if (nodo == pInicio) tablaD.add(new ElementoTablaD<>(0, nodo, nodo));
-            else tablaD.add(new ElementoTablaD<>(Integer.MAX_VALUE, null, nodo));
+        ArrayList conexiones = pElementoAnalizandose.getNodoActual().getArcos();
+        for (Object conexion : conexiones){
+            ElementoTablaD elementoConectado = getElementoTablaD((NodoG)conexion);
+            assert elementoConectado != null;
+            procesarElemento(pGrafo, elementoConectado, pElementoAnalizandose);
         }
-        return tablaD;
+
     }
 
-
-    private int getPesoDeUnArco(GrafoND<T> pGrafo , NodoG<T> pNodoA, NodoG<T> pNodoB){
-        for (Arco<T> arco : pGrafo.getArcos()){
-            if (arco.getPuntoB()==pNodoB && arco.getPuntoA() == pNodoA) return arco.getPeso();
+    public void procesarElemento(GrafoND pGrafo, ElementoTablaD elementoActual, ElementoTablaD posElementoOrigen){
+        NodoG nodoA = posElementoOrigen.getNodoActual();
+        NodoG nodoB = elementoActual.getNodoActual();
+        int posiblePesoAcumulado = posElementoOrigen.getPesoAcumulado() + pGrafo.getPesoDeUnArco(nodoA, nodoB);
+        if (elementoActual.getPesoAcumulado() > posiblePesoAcumulado){
+            elementoActual.setOrigen(nodoA);
+            elementoActual.setPesoAcumulado(posiblePesoAcumulado);
         }
-        return Integer.MAX_VALUE;
     }
 
-    private ElementoTablaD<T> getElementoTablaD(NodoG<T> pSearching, ArrayList<ElementoTablaD<T>> pDijkstraResult){
-        for (ElementoTablaD<T> elementoTablaD : pDijkstraResult){
+    public void crearTablaDInicial(GrafoND pGrafo, NodoG pInicio){
+        tablaD = new ArrayList<>();
+        for (Object nodo : pGrafo.getNodos() ){
+            if (nodo == pInicio) tablaD.add(new ElementoTablaD(0, (NodoG)nodo,(NodoG)nodo));
+            else tablaD.add(new ElementoTablaD(Integer.MAX_VALUE, null, (NodoG)nodo));
+        }
+    }
+
+    private ElementoTablaD getElementoTablaD(NodoG pSearching){
+        for (ElementoTablaD elementoTablaD : tablaD){
             if (elementoTablaD.getNodoActual() == pSearching){
                 return elementoTablaD;
             }
@@ -92,5 +108,7 @@ public class Dijkstra<T> extends AlgoritmoDeBusqueda {
         return null;
     }
 
-
+    public ArrayList<ElementoTablaD> getTablaD() {
+        return tablaD;
+    }
 }

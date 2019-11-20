@@ -19,13 +19,12 @@ public class Jugador implements IConstants {
 	}
 
 	
-	public Jugador(String pNombre, GrafoND<Casilla> map, PosiblePoints pFlagLocation,PlayerIdentifier pAorB, Jugador enemy) {
+	public Jugador(String pNombre, GrafoND<Casilla> map, PosiblePoints pFlagLocation,PlayerIdentifier pAorB) {
 
 		nombre = pNombre;
 		grupo1 = new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map);
 		grupo2 = new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.WARSHALL, map);
 		grupo3 = new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map);
-		this.enemy = enemy;
 		this.map = map;
 		setFlag(pAorB, pFlagLocation);
 
@@ -74,9 +73,23 @@ public class Jugador implements IConstants {
 		}
 	}
 
+	public Jugador getEnemy() {
+		return enemy;
+	}
 
+	public void setEnemy(Jugador enemy) {
+		this.enemy = enemy;
+	}
 
+	public Peloton getGrupo1() {
+		return grupo1;
+	}
 
-	
-	
+	public Peloton getGrupo2() {
+		return grupo2;
+	}
+
+	public Peloton getGrupo3() {
+		return grupo3;
+	}
 }

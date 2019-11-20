@@ -11,6 +11,7 @@ public class GrafoND<T> {
 
 	public GrafoND() {
 		nodos = new ArrayList<>();
+		arcos = new ArrayList<>();
 	}
 	
 	public void agregarNodo(NodoG<T> pNodo) {
@@ -19,15 +20,22 @@ public class GrafoND<T> {
 		}
 	}
 	
-	public void agregarArco(NodoG<T> pNodo1, NodoG<T> pNodo2) {
+	public void agregarArco(int peso,NodoG<T> pNodo1, NodoG<T> pNodo2) {
 		if(nodos.contains(pNodo1) && nodos.contains(pNodo2)) {
-			if(pNodo1.getArcos().contains(pNodo2)) {
-				return;
-			}
-			if(pNodo1.agregarArco(pNodo2)) {
-				arcos.add(new Arco<T>(1,pNodo1,pNodo2));
-			}
+				arcos.add(new Arco<T>(peso,pNodo1,pNodo2));
+				pNodo1.agregarArco(pNodo2);
+				pNodo2.agregarArco(pNodo1);
+
 		}
+	}
+
+
+	public int getPesoDeUnArco(NodoG pNodoA, NodoG pNodoB){
+		for (Arco arco : arcos){
+			if (((Arco)arco).getPuntoB()==pNodoB && ((Arco)arco).getPuntoA() == pNodoA ||
+					((Arco)arco).getPuntoB()==pNodoA && ((Arco)arco).getPuntoA() == pNodoB) return ((Arco)arco).getPeso();
+		}
+		return 7;
 	}
 
 	public ArrayList<NodoG<T>> getNodos() {

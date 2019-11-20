@@ -1,5 +1,6 @@
 package estructuras;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -7,28 +8,27 @@ public class NodoG <T>{
 	private T elemento;
 	private boolean visitado;
 	private int peso;
-	private Vector<NodoG<T>> arcos;
+	private ArrayList<NodoG<T>> arcos;
 	private UUID id;
 	
 	public NodoG(T pElemento){
 		elemento = pElemento;
-		arcos = new Vector<>();
+		arcos = new ArrayList<>();
 		id = UUID.randomUUID();
 	}
 	
 	public boolean agregarArco(NodoG<T> pNodo) {
-		if(!arcos.contains(pNodo)) {
+		try{
 			arcos.add(pNodo);
-			if(!pNodo.getArcos().contains(this)) {
-				pNodo.getArcos().add(this);
-			}
 			return true;
-		}else {
+		} catch (Exception ex){
 			return false;
 		}
+
+
 	}
 	
-	public Vector<NodoG<T>> getArcos(){
+	public ArrayList<NodoG<T>> getArcos(){
 		return arcos;
 	}
 	

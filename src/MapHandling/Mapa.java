@@ -11,7 +11,7 @@ public class Mapa {
 
     public Mapa(String jsonMapPath) {
         this.generador = new GeneradorDeMapas(jsonMapPath);
-        this.mapa = generador.generateMap();
+        mapa =  generador.getGeneratingMap();
     }
 
     public GrafoND<Casilla> getMapa() {

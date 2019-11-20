@@ -33,25 +33,29 @@ public class Peloton implements IConstants {
         this.map = map;
         setStartPoint(startPoint);
         setStrategy(strategy);
-        path = this.strategy.getPath(start, goal, map);
         actualPosition = start;
     }
 
     private void setStrategy(posibleAlgorithms strategy){
         switch (strategy){
             case DIJKSTRA:
-                this.strategy = new Dijkstra<>();
+                Dijkstra dijkstra = new Dijkstra(start, map);
+                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra;
                 break;
-            case MST:
-                this.strategy = new MST<>();
-            case WARSHALL:
-                this.strategy =  new Warshall<>(map, start, goal);
+//            case MST:
+//                Dijkstra dijkstra1 = new Dijkstra(start, map);
+//                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra1;
+//                break;
+//            case WARSHALL:
+//                Dijkstra dijkstra2 = new Dijkstra(start, map);
+//                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra2;
+//                break;
         }
     }
 
 
-    public void setGoalPoint(PosiblePoints goal) {
-        switch (goal){
+    public void setGoalPoint(PosiblePoints posibleGoalPoint) {
+        switch (posibleGoalPoint){
             case CENTER:
                 this.goal = getGoalCenter();
                 break;
@@ -62,6 +66,7 @@ public class Peloton implements IConstants {
                 this.goal = getGoalTopCorner();
                 break;
         }
+        path = this.strategy.getPath(start, goal, map);
     }
 
     private NodoG<Casilla> getGoalTopCorner() {
