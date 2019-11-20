@@ -48,13 +48,10 @@ public class GeneradorDeMapas implements IConstants {
                 Casilla newGrid = new Casilla(rowNumber, columnNumber);
                 NodoG<Casilla> newNode = new NodoG<>(newGrid);
                 if(isAValidNode(newNode)) newNodes.add(newNode);
-                else System.out.println("NOT VALID:" + newNode.getElemento().getX1() + "," + newNode.getElemento().getY1() + "//"
-                + newNode.getElemento().getX2() + "," + newNode.getElemento().getY2());
             }
         newNodes.addAll(flagGoals());
         return newNodes;
     }
-
     private ArrayList<Arco<Casilla>> generateArcs(ArrayList<NodoG<Casilla>> pNodes){
         ArrayList<Arco<Casilla>> arcs = new ArrayList<>();
         for (NodoG<Casilla> node : pNodes)
@@ -66,10 +63,8 @@ public class GeneradorDeMapas implements IConstants {
                     arcs.add(newArc);
                 }
             }
-
         return arcs;
     }
-
     private boolean isAdjacent(NodoG<Casilla> pNodeA, NodoG<Casilla> pNodeB){
         boolean adjacent = false;
         if (pNodeA.getElemento().getColumna() == pNodeB.getElemento().getColumna())
@@ -77,10 +72,8 @@ public class GeneradorDeMapas implements IConstants {
 
         if (pNodeA.getElemento().getFila() == pNodeB.getElemento().getFila())
             if (pNodeB.getElemento().getColumna() == pNodeA.getElemento().getColumna() + 1) adjacent = true;
-
         return adjacent;
     }
-
     private ArrayList<NodoG<Casilla>> flagGoals(){
         ArrayList<NodoG<Casilla>> flagGoals = new ArrayList<>();
         ArrayList<Casilla> reservedGrids = generateFlagGrids();
@@ -89,9 +82,7 @@ public class GeneradorDeMapas implements IConstants {
             flagGoals.add(newNode);
         }
         return flagGoals;
-
     }
-
     private ArrayList<Casilla> generateFlagGrids(){
         ArrayList<Casilla> flagGrids = new ArrayList<>();
         Casilla cornerA1 = new Casilla(0,0);
@@ -108,22 +99,6 @@ public class GeneradorDeMapas implements IConstants {
         flagGrids.add(cornerB2);
         return flagGrids;
     }
-
-//    private ArrayList<Arco<Casilla>> keepValidArcs(ArrayList<Arco<Casilla>> pArcs){
-//
-//
-//        return null;
-//    }
-//
-//    private boolean isAValidArc(Arco<Casilla> pArc){
-//        ArrayList<Obstaculo> obstacles = getObstacles();
-//        boolean isValid = true;
-//        for (Obstaculo obstacle : obstacles){
-//            int xRange = obstacle.x2 - obstacle.x1;
-//            int yRange = obstacle.y2 - obstacle.y1;
-//        }
-//        return isValid;
-//    }
     private boolean isAValidNode(NodoG<Casilla> pNode){
         ArrayList<Obstaculo> obstacles = getObstacles();
         boolean isValid = true;
@@ -132,7 +107,6 @@ public class GeneradorDeMapas implements IConstants {
         }
         return isValid;
     }
-    
     private boolean existsXIntersection(NodoG<Casilla> pNode, Obstaculo pObstacle){
         int nodeX1 = pNode.getElemento().getX1();
         int nodeX2 = pNode.getElemento().getX2();
@@ -145,9 +119,6 @@ public class GeneradorDeMapas implements IConstants {
         return (isBetween(nodeY1, pObstacle.y1, nodeY2) || isBetween(nodeY1, pObstacle.y2, nodeY2) ||
                 isBetween(pObstacle.y1, nodeY1, pObstacle.y2) || isBetween(pObstacle.y1, nodeY2, pObstacle.y2));
     }
-        
-    
-
     private boolean isBetween(int A, int B, int C){
         return (A <= B && B <= C);
     }

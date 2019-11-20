@@ -1,6 +1,8 @@
-package juego;
+package juego.Tropas;
 
-public class Marine extends Character{
+import juego.Character;
+
+public class Marine extends Character {
 
 	public Marine(int pAtaque, int pTiempEsp, int pEnergia) {
 		super();

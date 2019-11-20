@@ -1,6 +1,8 @@
-package juego;
+package juego.Tropas;
 
-public class Golpeador extends Character{
+import juego.Character;
+
+public class Golpeador extends Character {
 
 	public Golpeador(int pAtaque, int pTiempEsp, int pEnergia) {
 		super();
