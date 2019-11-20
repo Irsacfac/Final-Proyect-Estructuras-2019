@@ -23,6 +23,7 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		this.buscarElemento();
 	}
 	
+	//agrega todos los arcos directos a la tabla hash
 	private void arcosDirectos() {
 		NodoG<T> nodoActual;
 		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
@@ -36,17 +37,21 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		}
 	}
 	
+	
+	//en teoria, realiza las conecciones necesarias para llegar del punto al punto b un k iteraciones
 	private void buscarElemento() {
 		NodoG<T> nodoActual;
+		NodoG<T> nodoConector;
 		ElementoDeMatriz<T> origenActual;
 		ElementoDeMatriz<T> actualDestino;
 		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
-			nodoActual = grafo.getNodos().get(posNodo);
-			for(int arcoActual = 0; arcoActual< nodoActual.getArcos().size();arcoActual++) {
-				origenActual = new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoActual);
-				actualDestino = new ElementoDeMatriz<>(nodoActual, ruta.getNodoDestino());
+			nodoConector = grafo.getNodos().get(posNodo);
+			for(int arcoActual = 0; arcoActual< nodoConector.getArcos().size();arcoActual++) {
+				nodoActual = nodoConector.getArcos().get(arcoActual);
+				origenActual = new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoConector);
+				actualDestino = new ElementoDeMatriz<>(nodoConector, nodoActual);
 				if(tablaHash.containsKey(origenActual) && tablaHash.containsKey(actualDestino)) {
-					tablaHash.put(ruta, nodoActual);
+					tablaHash.put(new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoActual), nodoConector);
 				}
 				if(tablaHash.containsKey(ruta)) {
 					return;
@@ -55,6 +60,18 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 			
 		}
 	}
+	
+	// devuelve un array con los nodos para llegar del punto a al punto b, se debe recorrer alreves
+	public ArrayList<NodoG<T>> retornarCamino(){
+		ArrayList<NodoG<T>> camino = new ArrayList<>();
+		camino.add(ruta.getNodoDestino());
+		ElementoDeMatriz<T> conectores = ruta;
+		while(tablaHash.get(conectores) != null) {
+			camino.add(tablaHash.get(conectores));
+		}
+		return camino;
+	}
+	
     @Override
     public ArrayList<NodoG<T>> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
         return null;
