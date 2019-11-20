@@ -11,6 +11,7 @@ public class GrafoND<T> {
 
 	public GrafoND() {
 		nodos = new ArrayList<>();
+		arcos = new ArrayList<>();
 	}
 	
 	public void agregarNodo(NodoG<T> pNodo) {
