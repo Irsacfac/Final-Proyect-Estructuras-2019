@@ -14,6 +14,7 @@ public class Casilla implements IConstants {
     private int x2;
     private int y2;
     ArrayList<Character> peloton;
+    private boolean flagLocation;
 
     public Casilla(int fila, int columna) {
 
@@ -27,6 +28,7 @@ public class Casilla implements IConstants {
         y2 = ALTURA_CASILLA * (fila + 1);
 
         this.peloton = null;
+        flagLocation = false;
 
     }
 
@@ -56,5 +58,13 @@ public class Casilla implements IConstants {
 
     public int getY2() {
         return y2;
+    }
+
+    public boolean isFlagLocation() {
+        return flagLocation;
+    }
+
+    public void setFlagLocation(boolean flagLocation) {
+        this.flagLocation = flagLocation;
     }
 }

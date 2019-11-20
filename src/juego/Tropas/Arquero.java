@@ -1,6 +1,8 @@
-package juego;
+package juego.Tropas;
 
-public class Arquero extends Character{
+import juego.Character;
+
+public class Arquero extends Character {
 
 	public Arquero() {
 		super();
