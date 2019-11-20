@@ -7,9 +7,9 @@ public class ElementoDeMatriz<T> {
     private NodoG<T> nodoOrigen;
     private NodoG<T> nodoDestino;
 
-    public ElementoDeMatriz(NodoG<T> pNodoOrigen, NodoG<T> pNodoActual) {
+    public ElementoDeMatriz(NodoG<T> pNodoOrigen, NodoG<T> pNodoDestino) {
         this.nodoOrigen = pNodoOrigen;
-        this.nodoDestino = pNodoActual;
+        this.nodoDestino = pNodoDestino;
     }
 
     public NodoG<T> getNodoOrigen() {
