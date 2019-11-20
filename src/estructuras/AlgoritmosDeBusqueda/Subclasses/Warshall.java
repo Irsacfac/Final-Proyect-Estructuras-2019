@@ -22,7 +22,13 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		this.arcosDirectos();
 		this.buscarElemento();
 	}
-	
+
+	@Override
+	public ArrayList<NodoG<T>> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
+		return retornarCamino();
+	}
+
+
 	//agrega todos los arcos directos a la tabla hash
 	private void arcosDirectos() {
 		NodoG<T> nodoActual;
@@ -38,7 +44,7 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	}
 	
 	
-	//en teoria, realiza las conecciones necesarias para llegar del punto al punto b un k iteraciones
+	//en teoria, realiza las conexiones necesarias para llegar del punto al punto b un k iteraciones
 	private void buscarElemento() {
 		NodoG<T> nodoActual;
 		NodoG<T> nodoConector;
@@ -72,36 +78,8 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		return camino;
 	}
 	
-    @Override
-    public ArrayList<NodoG<T>> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
-        return null;
-    }
-//
-//    public ArrayList<NodoG<T>> algoritmoWarshall(GrafoND<T> pGrafo, NodoG<T> pNodoA, NodoG<T> pNodoB){
-//
-//
-//
-//    }
-//
-//    private ArrayList<ElementoDeMatriz<T>> generarP0(GrafoND<T> pGrafo  ){
-//
-//    }
 
-    private boolean existeConexion(int i, int j, GrafoND<T> pGrafo){
-        return pGrafo.getNodos().get(i).getArcos().contains(pGrafo.getNodos().get(j));
-    }
 
-    private Arco<T> getConexion(int i, int j, GrafoND<T> pGrafo){
-        ArrayList<Arco<T>> conexiones = pGrafo.getArcos();
-        NodoG<T> nodoA = pGrafo.getNodos().get(i);
-        NodoG<T> nodoB = pGrafo.getNodos().get(j);
-        for (Arco<T> conexion : conexiones){
-            if (conexion.getPuntoA() == nodoA && conexion.getPuntoB() == nodoB){
-                return conexion;
-            }
-        }
-        return null;
-    }
 
 
 
