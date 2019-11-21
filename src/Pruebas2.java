@@ -1,5 +1,6 @@
 import estructuras.AlgoritmosDeBusqueda.Subclasses.Dijkstra;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.ElementoTablaD;
+import estructuras.AlgoritmosDeBusqueda.Subclasses.MST;
 import estructuras.Arco;
 import estructuras.GrafoND;
 import estructuras.NodoG;
@@ -32,19 +33,16 @@ public class Pruebas2 {
         prueba.agregarArco( 2,nodoD, nodoE);
         prueba.agregarArco( 1,nodoB, nodoE);
 
-        System.out.println( "Cantidad de Arcos" + prueba.getArcos().size());
+        System.out.println( "Cantidad de Arcos " + prueba.getArcos().size());
 
-        Dijkstra dijkstra = new Dijkstra(nodoA, prueba);
-        ArrayList<ElementoTablaD> elementos = dijkstra.getTablaD();
-        System.out.println( "Cantidad de ElementosD: " + elementos.size());
-        for (ElementoTablaD elemento : elementos){
-            System.out.println("---------------");
-            System.out.println("Origen: " + (elemento.getOrigen().getElemento()));
-            System.out.println("Actual: " + elemento.getNodoActual().getElemento());
-            System.out.println("Peso Acumulado: " + elemento.getPesoAcumulado());
+        MST mst = new MST();
+//        ArrayList<Arco> algoritmo = mst.algoritmoMST(prueba);
+//        for (Arco arco : algoritmo){
+//            System.out.println(arco.getPuntoA().getElemento()+""+arco.getPuntoB().getElemento());
+//        }
 
-        }
-        ArrayList<NodoG> path = dijkstra.getPath(nodoA, nodoE, prueba);
+        ArrayList<NodoG> path = mst.getPath(nodoB, nodoE, prueba);
+        System.out.println("\n"+"Final path");
         for (NodoG nodo : path){
             System.out.println(nodo.getElemento());
         }

@@ -39,13 +39,11 @@ public class Peloton implements IConstants {
     private void setStrategy(posibleAlgorithms strategy){
         switch (strategy){
             case DIJKSTRA:
-                Dijkstra dijkstra = new Dijkstra(start, map);
-                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra;
+                this.strategy = (AlgoritmoDeBusqueda<Casilla>) new Dijkstra(start, map);
                 break;
-//            case MST:
-//                Dijkstra dijkstra1 = new Dijkstra(start, map);
-//                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra1;
-//                break;
+            case MST:
+                this.strategy = (AlgoritmoDeBusqueda<Casilla>) new MST();
+                break;
 //            case WARSHALL:
 //                Dijkstra dijkstra2 = new Dijkstra(start, map);
 //                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra2;
@@ -66,6 +64,7 @@ public class Peloton implements IConstants {
                 this.goal = getGoalTopCorner();
                 break;
         }
+        System.out.println(strategy==null);
         path = this.strategy.getPath(start, goal, map);
     }
 
@@ -107,7 +106,7 @@ public class Peloton implements IConstants {
         }
     }
 
-    private NodoG<Casilla> getStartCenter() {
+    private NodoG<Casilla> getStartTopCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (nodo.getElemento().getFila() == 0)
                 if (nodo.getElemento().getColumna() == 0) return nodo;
@@ -123,7 +122,7 @@ public class Peloton implements IConstants {
         return null;
     }
 
-    private NodoG<Casilla> getStartTopCorner(){
+    private NodoG<Casilla> getStartCenter(){
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (nodo.getElemento().getFila() == FILA_CENTRAL)
                 if (nodo.getElemento().getColumna() == 0) return nodo;
