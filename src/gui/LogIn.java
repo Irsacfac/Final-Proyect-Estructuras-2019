@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import otros.IConstants;
 
-public class LogIn extends JFrame implements IConstants{
+public class LogIn extends JFrame implements IConstants {
 	private JTextField textbar;
 	private JButton botonLogIn;
 	private JPanel panelLogIn;
@@ -31,7 +31,7 @@ public class LogIn extends JFrame implements IConstants{
 	
 	private void initComponents() {
 		panelLogIn = new JPanel();
-		panelLogIn.setBounds(0, 0, PANTALLA_ANCHURA, PANTALLA_ALTURA/2);
+		panelLogIn.setBounds(0, 0, PANTALLA_ANCHURA, PANTALLA_ALTURA);
 		panelLogIn.setLayout(null);
 		//panelLogIn.setBackground(Color.AQUAMARINE);
 		this.getContentPane().add(panelLogIn);

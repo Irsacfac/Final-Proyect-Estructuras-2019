@@ -9,6 +9,7 @@ public class Jugador implements IConstants {
 
 	private String nombre;
 	private Jugador enemy;
+	private Peloton[] pelotones;
 	private Peloton grupo1;
 	private Peloton grupo2;
 	private Peloton grupo3;
@@ -22,6 +23,7 @@ public class Jugador implements IConstants {
 	public Jugador(String pNombre, GrafoND<Casilla> map, PosiblePoints pFlagLocation,PlayerIdentifier pAorB) {
 
 		nombre = pNombre;
+		pelotones = new Peloton[]{new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map), new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.WARSHALL, map), new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map)};
 		grupo1 = new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map);
 		grupo2 = new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.WARSHALL, map);
 		grupo3 = new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map);
@@ -91,5 +93,9 @@ public class Jugador implements IConstants {
 
 	public Peloton getGrupo3() {
 		return grupo3;
+	}
+	
+	public Peloton[] getPelotones() {
+		return pelotones;
 	}
 }

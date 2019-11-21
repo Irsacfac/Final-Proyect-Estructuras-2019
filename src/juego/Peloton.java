@@ -11,13 +11,15 @@ import otros.IConstants;
 
 import java.util.ArrayList;
 
+import javax.swing.plaf.basic.BasicTreeUI.TreeHomeAction;
+
 public class Peloton implements IConstants {
 
     private ArrayList<Character> soldiers;
     private GrafoND<Casilla> map;
     private AlgoritmoDeBusqueda<Casilla> strategy;
     private ArrayList<NodoG<Casilla>> path;
-
+    private Runnable movimiento;
     private NodoG<Casilla> start;
     private NodoG<Casilla> actualPosition;
     private NodoG<Casilla> goal;
@@ -161,5 +163,18 @@ public class Peloton implements IConstants {
 
     public void setActualPosition(NodoG<Casilla> actualPosition) {
         this.actualPosition = actualPosition;
+    }
+    
+    public Runnable getMovimiento() {
+    	return movimiento;
+    }
+    
+    private void run() {
+    	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
