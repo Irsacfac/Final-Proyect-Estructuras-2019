@@ -10,7 +10,7 @@ import java.util.Hashtable;
 import java.util.Stack;
 import java.util.Vector;
 
-public class Warshall extends AlgoritmoDeBusqueda {
+public class Warshall<T> extends AlgoritmoDeBusqueda {
 
 	private Hashtable<String, ElementoDeMatriz<T>> tablaHash;
 	private GrafoND<T> grafo;
@@ -29,7 +29,7 @@ public class Warshall extends AlgoritmoDeBusqueda {
 	}
 
 	@Override
-	public ArrayList<NodoG> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
+	public ArrayList<NodoG<T>> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
 		return retornarCamino();
 	}
 
@@ -40,7 +40,7 @@ public class Warshall extends AlgoritmoDeBusqueda {
 		NodoG<T> nodoActual;
 		NodoG<T> arcoActual;
 		ElementoDeMatriz<T> elementoActual;
-		recorrido.add(new Vector<>());
+		//recorrido.add(new Vector<>());
 		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
 			nodoActual = grafo.getNodos().get(posNodo);
 			for(int posArco = 0; posArco < nodoActual.getArcos().size(); posArco++) {
@@ -127,7 +127,7 @@ public class Warshall extends AlgoritmoDeBusqueda {
 				}
 			}
 			
-		}
+		}*/
 	}
 	
 	// devuelve un array con los nodos para llegar del punto a al punto b, se debe recorrer alreves
