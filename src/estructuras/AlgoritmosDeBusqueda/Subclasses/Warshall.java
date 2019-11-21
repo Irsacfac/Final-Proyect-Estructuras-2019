@@ -12,11 +12,13 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 
 	private Hashtable<ElementoDeMatriz<T>, NodoG<T>> tablaHash;
 	private GrafoND<T> grafo;
+	private NodoG<T> nodoParada;
 	private ElementoDeMatriz<T> ruta;
 	
 	public Warshall(GrafoND<T> pGrafo, NodoG<T> pPartida, NodoG<T> pDestino) {
 		grafo = pGrafo;
 		ruta = new ElementoDeMatriz<>(pPartida, pDestino);
+		nodoParada = new NodoG<>(null);
 		tablaHash = new Hashtable<>();
 		
 		this.arcosDirectos();
@@ -35,7 +37,7 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
 			nodoActual = grafo.getNodos().get(posNodo);
 			for(int conecciones = 0; conecciones < nodoActual.getArcos().size(); conecciones++) {
-				tablaHash.put(new ElementoDeMatriz<>(nodoActual, nodoActual.getArcos().get(conecciones)), null);
+				tablaHash.put(new ElementoDeMatriz<>(nodoActual, nodoActual.getArcos().get(conecciones)), nodoParada);
 				if(tablaHash.containsKey(ruta)) {
 					return;
 				}
@@ -72,7 +74,7 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		ArrayList<NodoG<T>> camino = new ArrayList<>();
 		camino.add(ruta.getNodoDestino());
 		ElementoDeMatriz<T> conectores = ruta;
-		while(tablaHash.get(conectores) != null) {
+		while(tablaHash.get(conectores) != nodoParada) {
 			camino.add(tablaHash.get(conectores));
 		}
 		return camino;

@@ -3,6 +3,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,6 +27,10 @@ public class Juego extends JFrame implements IConstants {
         initComponents();
         
         this.setVisible(true);
+	}
+	
+	public void paint(Graphics g) {
+		
 	}
 
 	private void initComponents() {
