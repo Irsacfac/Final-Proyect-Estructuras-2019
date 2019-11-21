@@ -1,19 +1,21 @@
 package gui;
 
-import java.awt.Frame;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import otros.IConstants;
 
 public class LogIn extends JFrame implements IConstants {
-	private JTextField textbar;
+
+    private JTextField mail;
+    private JTextField password;
 	private JButton botonLogIn;
+    private JButton botonRegister;
 	private JPanel panelLogIn;
-	
+	private JLabel passwordLabel;
+	private JLabel mailLabel;
+
 	public LogIn() {
 		super("Capturar la bandera");
 		
@@ -23,6 +25,7 @@ public class LogIn extends JFrame implements IConstants {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setExtendedState(Frame.NORMAL);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         initComponents();
         
@@ -35,13 +38,36 @@ public class LogIn extends JFrame implements IConstants {
 		panelLogIn.setLayout(null);
 		//panelLogIn.setBackground(Color.AQUAMARINE);
 		this.getContentPane().add(panelLogIn);
+
+		mailLabel = new JLabel();
+		mailLabel.setText("email");
+		mailLabel.setBounds(USER_LABEL_X, USER_LABEL_Y, DEFAUL_LABEL_WIDTH, DEFAUL_LABEL_HEIGHT);
+		panelLogIn.add(mailLabel);
 		
-		textbar = new JTextField();
-		textbar.setBounds(X_TEXTLABEL, (int)PANTALLA_ALTURA/4, TEXTLABEL_ANCHURA, DEFAULT_BUTTON_ALTURA);
-		panelLogIn.add(textbar);
+		mail = new JTextField();
+		mail.setAlignmentX(Component.CENTER_ALIGNMENT);
+		mail.setBounds(USER_INPUT_X, USER_INPUT_Y, TEXTLABEL_ANCHURA, DEFAULT_BUTTON_ALTURA);
+		panelLogIn.add(mail);
+
+
+
+		passwordLabel = new JLabel();
+		passwordLabel.setText("password");
+		passwordLabel.setBounds(PASSWORD_LABEL_X, PASSWORD_LABEL_Y, DEFAUL_LABEL_WIDTH, DEFAUL_LABEL_HEIGHT);
+		panelLogIn.add(passwordLabel);
+
+		password = new JTextField();
+		password.setBounds(PASSWORD_INPUT_X, PASSWORD_INPUT_Y, TEXTLABEL_ANCHURA, DEFAULT_BUTTON_ALTURA);
+		panelLogIn.add(password);
 		
-		botonLogIn = new JButton("Log In");
-		botonLogIn.setBounds(PANTALLA_ANCHURA/3, (PANTALLA_ALTURA/3), DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
+		botonLogIn = new JButton("LogIn");
+		botonLogIn.setBounds(LOGIN_BOTTON_X, LOGIN_BOTTON_Y, DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
 		panelLogIn.add(botonLogIn);
+
+		botonRegister = new JButton("Registrar");
+		botonRegister.setBounds(REGISTER_BOTTON_X, REGISTER_BOTTON_Y, DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
+		panelLogIn.add(botonRegister);
+
+
 	}
 }

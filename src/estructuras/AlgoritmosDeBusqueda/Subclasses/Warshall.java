@@ -8,15 +8,38 @@ import estructuras.NodoG;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class Warshall<T> extends AlgoritmoDeBusqueda {
+public class Warshall extends AlgoritmoDeBusqueda {
 
-	private Hashtable<ElementoDeMatriz<T>, NodoG<T>> tablaHash;
-	private GrafoND<T> grafo;
-	private ElementoDeMatriz<T> ruta;
+	private Hashtable<ElementoDeMatriz, NodoG> tablaHash;
+	private GrafoND grafo;
+	private ElementoDeMatriz ruta;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	6
 	
-	public Warshall(GrafoND<T> pGrafo, NodoG<T> pPartida, NodoG<T> pDestino) {
+	public Warshall(GrafoND pGrafo, NodoG pPartida, NodoG pDestino) {
 		grafo = pGrafo;
-		ruta = new ElementoDeMatriz<>(pPartida, pDestino);
+		ruta = new ElementoDeMatriz(pPartida, pDestino);
 		tablaHash = new Hashtable<>();
 		
 		this.arcosDirectos();
@@ -24,18 +47,18 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	}
 
 	@Override
-	public ArrayList<NodoG<T>> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
+	public ArrayList<NodoG> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
 		return retornarCamino();
 	}
 
 
 	//agrega todos los arcos directos a la tabla hash
 	private void arcosDirectos() {
-		NodoG<T> nodoActual;
+		NodoG nodoActual;
 		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
-			nodoActual = grafo.getNodos().get(posNodo);
+			nodoActual = ((NodoG)grafo.getNodos().get(posNodo));
 			for(int conecciones = 0; conecciones < nodoActual.getArcos().size(); conecciones++) {
-				tablaHash.put(new ElementoDeMatriz<>(nodoActual, nodoActual.getArcos().get(conecciones)), null);
+				tablaHash.put(new ElementoDeMatriz(nodoActual,(NodoG)nodoActual.getArcos().get(conecciones)), null);
 				if(tablaHash.containsKey(ruta)) {
 					return;
 				}
@@ -46,18 +69,18 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	
 	//en teoria, realiza las conexiones necesarias para llegar del punto al punto b un k iteraciones
 	private void buscarElemento() {
-		NodoG<T> nodoActual;
-		NodoG<T> nodoConector;
-		ElementoDeMatriz<T> origenActual;
-		ElementoDeMatriz<T> actualDestino;
+		NodoG nodoActual;
+		NodoG nodoConector;
+		ElementoDeMatriz origenActual;
+		ElementoDeMatriz actualDestino;
 		for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
-			nodoConector = grafo.getNodos().get(posNodo);
+			nodoConector = (NodoG) grafo.getNodos().get(posNodo);
 			for(int arcoActual = 0; arcoActual< nodoConector.getArcos().size();arcoActual++) {
-				nodoActual = nodoConector.getArcos().get(arcoActual);
-				origenActual = new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoConector);
-				actualDestino = new ElementoDeMatriz<>(nodoConector, nodoActual);
+				nodoActual = (NodoG)nodoConector.getArcos().get(arcoActual);
+				origenActual = new ElementoDeMatriz(ruta.getNodoOrigen(), nodoConector);
+				actualDestino = new ElementoDeMatriz(nodoConector, nodoActual);
 				if(tablaHash.containsKey(origenActual) && tablaHash.containsKey(actualDestino)) {
-					tablaHash.put(new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoActual), nodoConector);
+					tablaHash.put(new ElementoDeMatriz(ruta.getNodoOrigen(), nodoActual), nodoConector);
 				}
 				if(tablaHash.containsKey(ruta)) {
 					return;
@@ -68,10 +91,10 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	}
 	
 	// devuelve un array con los nodos para llegar del punto a al punto b, se debe recorrer alreves
-	public ArrayList<NodoG<T>> retornarCamino(){
-		ArrayList<NodoG<T>> camino = new ArrayList<>();
+	public ArrayList<NodoG> retornarCamino(){
+		ArrayList<NodoG> camino = new ArrayList<>();
 		camino.add(ruta.getNodoDestino());
-		ElementoDeMatriz<T> conectores = ruta;
+		ElementoDeMatriz conectores = ruta;
 		while(tablaHash.get(conectores) != null) {
 			camino.add(tablaHash.get(conectores));
 		}

@@ -22,6 +22,7 @@ public class Juego extends JFrame implements IConstants {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setExtendedState(Frame.NORMAL);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         initComponents();
         

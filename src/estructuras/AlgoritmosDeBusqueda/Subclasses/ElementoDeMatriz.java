@@ -3,20 +3,20 @@ package estructuras.AlgoritmosDeBusqueda.Subclasses;
 import estructuras.Arco;
 import estructuras.NodoG;
 
-public class ElementoDeMatriz<T> {
-    private NodoG<T> nodoOrigen;
-    private NodoG<T> nodoDestino;
+public class ElementoDeMatriz {
+    private NodoG nodoOrigen;
+    private NodoG nodoDestino;
 
-    public ElementoDeMatriz(NodoG<T> pNodoOrigen, NodoG<T> pNodoDestino) {
+    public ElementoDeMatriz(NodoG pNodoOrigen, NodoG pNodoDestino) {
         this.nodoOrigen = pNodoOrigen;
         this.nodoDestino = pNodoDestino;
     }
 
-    public NodoG<T> getNodoOrigen() {
+    public NodoG getNodoOrigen() {
         return nodoOrigen;
     }
 
-	public NodoG<T> getNodoDestino() {
+	public NodoG getNodoDestino() {
 		return nodoDestino;
 	}
 
