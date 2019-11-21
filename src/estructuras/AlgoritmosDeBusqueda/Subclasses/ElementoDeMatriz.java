@@ -22,6 +22,10 @@ public class ElementoDeMatriz<T> implements Comparable<ElementoDeMatriz<T>>{
 		return nodoDestino;
 	}
 	
+	protected void setNodoDestino(NodoG<T> pNodoDestino) {
+		nodoDestino = pNodoDestino;
+	}
+	
 	public NodoG<T> getNodoAnterior(){
 		return nodoAnterior;
 	}

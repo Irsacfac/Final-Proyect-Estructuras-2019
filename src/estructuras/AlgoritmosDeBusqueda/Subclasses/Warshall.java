@@ -111,16 +111,29 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	// devuelve un array con los nodos para llegar del punto a al punto b, se debe recorrer alreves
 	public ArrayList<NodoG<T>> retornarCamino(){
 		System.out.println("Retornar camono warshall");
-		int contador = 0;
+		Vector<ElementoDeMatriz<T>> actual = recorrido.lastElement();
+		ElementoDeMatriz<T> elementoActual = actual.lastElement();
+		int contador;
 		ArrayList<NodoG<T>> camino = new ArrayList<>();
-		camino.add(ruta.getNodoDestino());
-		ElementoDeMatriz<T> conectores = ruta;
-		while(conectores.getNodoAnterior() != null) {
+		//camino.add(elementoActual.getNodoDestino());
+		for(int pos = recorrido.size()-1; pos > 0; pos--) {
+			actual = recorrido.elementAt(pos);
+			contador = actual.size()-1;
+			while((ruta.compareTo(elementoActual) != 0) || (contador >= 0)) {
+				contador--;
+				elementoActual = actual.elementAt(contador);
+			}
+			
+			ruta.setNodoDestino(elementoActual.getNodoAnterior());
+			camino.add(elementoActual.getNodoAnterior());
+		}
+		//ElementoDeMatriz<T> conectores = ruta;
+		/*while(conectores.getNodoAnterior() != null) {
 			conectores = tablaHash.get(conectores);
 			camino.add(conectores.getNodoAnterior());
 			System.out.println(contador);
 			contador++;
-		}
+		}*/
 		return camino;
 	}
 	
