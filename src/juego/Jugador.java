@@ -23,10 +23,10 @@ public class Jugador implements IConstants {
 	public Jugador(String pNombre, GrafoND<Casilla> map, PosiblePoints pFlagLocation,PlayerIdentifier pAorB) {
 
 		nombre = pNombre;
-		pelotones = new Peloton[]{new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map), new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.WARSHALL, map), new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map)};
-		grupo1 = new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map);
-		grupo2 = new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map);
-		grupo3 = new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.WARSHALL, map);
+		pelotones = new Peloton[]{new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map, pAorB), new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.WARSHALL, map, pAorB), new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map, pAorB)};
+		grupo1 = new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map, pAorB);
+		grupo2 = new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.MST, map, pAorB);
+		grupo3 = new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.WARSHALL, map, pAorB);
 		this.map = map;
 		setFlag(pAorB, pFlagLocation);
 

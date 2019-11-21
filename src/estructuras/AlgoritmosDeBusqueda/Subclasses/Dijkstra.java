@@ -19,18 +19,18 @@ public class Dijkstra extends AlgoritmoDeBusqueda {
     }
 
     @Override
-    public  ArrayList<NodoG>  getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
+    public  ArrayList<NodoG> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
         ArrayList<NodoG> path = new ArrayList<>();
         NodoG origen;
         NodoG actual = pDestino;
         while(actual != pInicio){
             ElementoTablaD elementoActual = getElementoTablaD(actual);
-
             path.add(elementoActual.getNodoActual());
             origen = elementoActual.getOrigen();
             actual = origen;
 
         }
+        path.add(pInicio);
         Collections.reverse(path);
         return path;
     }

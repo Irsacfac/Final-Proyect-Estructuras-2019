@@ -10,7 +10,7 @@ import java.util.Hashtable;
 import java.util.Stack;
 import java.util.Vector;
 
-public class Warshall<T> extends AlgoritmoDeBusqueda {
+public class Warshall extends AlgoritmoDeBusqueda {
 
 	private Hashtable<String, ElementoDeMatriz<T>> tablaHash;
 	private GrafoND<T> grafo;
@@ -18,19 +18,18 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 	private String ruta;
 	private Vector<Vector<ElementoDeMatriz<T>>> recorrido;
 	
-	public Warshall(GrafoND<T> pGrafo, NodoG<T> pPartida, NodoG<T> pDestino) {
+	public Warshall(GrafoND pGrafo, NodoG pPartida, NodoG pDestino) {
 		grafo = pGrafo;
 		ruta = pPartida.getId() +"-"+ pDestino.getId();
 		nodoParada = pPartida;
 		tablaHash = new Hashtable<>();
-		recorrido = new Vector<>();
 		
 		this.arcosDirectos();
 		this.buscarElemento();
 	}
 
 	@Override
-	public ArrayList<NodoG<T>> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
+	public ArrayList<NodoG> getPath(NodoG pInicio, NodoG pDestino, GrafoND pGrafo) {
 		return retornarCamino();
 	}
 
@@ -53,11 +52,8 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		/*for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
 			nodoActual = grafo.getNodos().get(posNodo);
 			for(int conecciones = 0; conecciones < nodoActual.getArcos().size(); conecciones++) {
-				elementoActual = new ElementoDeMatriz<>(nodoActual, nodoActual.getArcos().get(conecciones));
-				tablaHash.put(elementoActual, elementoActual);
-				recorrido.firstElement().add(elementoActual);
-				if(elementoActual.compareTo(ruta)==0) {
-					ruta = elementoActual; 
+				tablaHash.put(new ElementoDeMatriz(nodoActual,(NodoG)nodoActual.getArcos().get(conecciones)), null);
+				if(tablaHash.containsKey(ruta)) {
 					return;
 				}
 			}
@@ -120,24 +116,18 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		/*for(int posNodo = 0; posNodo < grafo.getNodos().size(); posNodo++) {
 			nodoConector = grafo.getNodos().get(posNodo);
 			for(int arcoActual = 0; arcoActual< nodoConector.getArcos().size();arcoActual++) {
-				nodoActual = nodoConector.getArcos().get(arcoActual);
-				//origenActual = new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoConector);
-				//actualDestino = new ElementoDeMatriz<>(nodoConector, nodoActual);
-				if((ruta.getNodoOrigen().getArcos().contains(nodoConector)) && (nodoConector.getArcos().contains(nodoActual))) {
-					elementoActual = new ElementoDeMatriz<>(ruta.getNodoOrigen(), nodoActual);
-					elementoActual.setNodoAnterior(nodoConector);
-					tablaHash.put(elementoActual, elementoActual);
-					if(elementoActual.compareTo(ruta) == 0) {
-						ruta = elementoActual; 
-						return;
-					}
+				nodoActual = (NodoG)nodoConector.getArcos().get(arcoActual);
+				origenActual = new ElementoDeMatriz(ruta.getNodoOrigen(), nodoConector);
+				actualDestino = new ElementoDeMatriz(nodoConector, nodoActual);
+				if(tablaHash.containsKey(origenActual) && tablaHash.containsKey(actualDestino)) {
+					tablaHash.put(new ElementoDeMatriz(ruta.getNodoOrigen(), nodoActual), nodoConector);
 				}
-				/*if(tablaHash.containsKey(ruta)) {
+				if(tablaHash.containsKey(ruta)) {
 					return;
 				}
 			}
 			
-		}*/
+		}
 	}
 	
 	// devuelve un array con los nodos para llegar del punto a al punto b, se debe recorrer alreves

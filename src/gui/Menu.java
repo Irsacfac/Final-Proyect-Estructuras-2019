@@ -6,14 +6,13 @@ import java.awt.Frame;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import otros.IConstants;
 
 public class Menu extends JFrame implements IConstants{
 	private JPanel buttonPanel;
 	private JButton botonNuevoJuego;
-	private JButton botonPuntages;
+	private JButton botonPuntajes;
 	
 	public Menu() {
 		super("Capturar la bandera");
@@ -23,6 +22,7 @@ public class Menu extends JFrame implements IConstants{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setExtendedState(Frame.NORMAL);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         initComponents();
         
@@ -41,8 +41,8 @@ public class Menu extends JFrame implements IConstants{
 		botonNuevoJuego.setBounds(PANTALLA_ANCHURA/3, (PANTALLA_ALTURA/3), DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
 		buttonPanel.add(botonNuevoJuego);
 		
-		botonPuntages = new JButton("Puntajes");
-		botonPuntages.setBounds(PANTALLA_ANCHURA/3, PANTALLA_ALTURA/3+DEFAULT_BUTTON_ALTURA+5, DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
-		buttonPanel.add(botonPuntages);
+		botonPuntajes = new JButton("Puntajes");
+		botonPuntajes.setBounds(PANTALLA_ANCHURA/3, PANTALLA_ALTURA/3+DEFAULT_BUTTON_ALTURA+5, DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
+		buttonPanel.add(botonPuntajes);
 	}
 }

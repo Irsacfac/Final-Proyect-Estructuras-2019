@@ -10,6 +10,7 @@ import estructuras.NodoG;
 import otros.IConstants;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.plaf.basic.BasicTreeUI.TreeHomeAction;
 
@@ -23,6 +24,7 @@ public class Peloton implements IConstants {
     private NodoG<Casilla> start;
     private NodoG<Casilla> actualPosition;
     private NodoG<Casilla> goal;
+    private Jugador.PlayerIdentifier playerIdentifier;
 
     public enum posibleAlgorithms{
         DIJKSTRA,
@@ -31,11 +33,12 @@ public class Peloton implements IConstants {
     }
 
 
-    public Peloton(PosiblePoints startPoint, posibleAlgorithms strategy, GrafoND<Casilla> map) {
+    public Peloton(PosiblePoints startPoint, posibleAlgorithms strategy, GrafoND<Casilla> map, Jugador.PlayerIdentifier pAorB) {
         this.map = map;
         setStartPoint(startPoint);
         setStrategy(strategy);
         actualPosition = start;
+        playerIdentifier = pAorB;
     }
 
     private void setStrategy(posibleAlgorithms strategy){
@@ -66,30 +69,48 @@ public class Peloton implements IConstants {
                 this.goal = getGoalTopCorner();
                 break;
         }
-        System.out.println(strategy==null);
         path = this.strategy.getPath(start, goal, map);
+        if (path.get(0) != start){
+            Collections.reverse(path);
+        }
     }
 
     private NodoG<Casilla> getGoalTopCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
-            if (nodo.getElemento().getFila() == 0)
-                if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            if (playerIdentifier == Jugador.PlayerIdentifier.B)
+            {
+                if (nodo.getElemento().getFila() == 0)
+                    if (nodo.getElemento().getColumna() == 0) return nodo;
+            } else {
+                if (nodo.getElemento().getFila() == 0)
+                    if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            }
         }
         return null;
     }
 
     private NodoG<Casilla> getGoalLowCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
-            if (nodo.getElemento().getFila() == ULTIMA_FILA)
-                if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            if (playerIdentifier == Jugador.PlayerIdentifier.B) {
+                if (nodo.getElemento().getFila() == ULTIMA_FILA)
+                    if (nodo.getElemento().getColumna() == 0) return nodo;
+            } else {
+                if (nodo.getElemento().getFila() == ULTIMA_FILA)
+                    if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            }
         }
         return null;
     }
 
     private NodoG<Casilla> getGoalCenter() {
         for (NodoG<Casilla> nodo : map.getNodos()){
-            if (nodo.getElemento().getFila() == FILA_CENTRAL)
-                if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            if (playerIdentifier == Jugador.PlayerIdentifier.B) {
+                if (nodo.getElemento().getFila() == FILA_CENTRAL)
+                    if (nodo.getElemento().getColumna() == 0) return nodo;
+            } else {
+                if (nodo.getElemento().getFila() == FILA_CENTRAL)
+                    if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            }
         }
         return null;
     }
@@ -110,30 +131,61 @@ public class Peloton implements IConstants {
 
     private NodoG<Casilla> getStartTopCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
-            if (nodo.getElemento().getFila() == 0)
-                if (nodo.getElemento().getColumna() == 0) return nodo;
+            if (playerIdentifier == Jugador.PlayerIdentifier.A)
+            {
+                if (nodo.getElemento().getFila() == 0)
+                    if (nodo.getElemento().getColumna() == 0) return nodo;
+            } else {
+                if (nodo.getElemento().getFila() == 0)
+                    if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            }
+
         }
         return null;
     }
 
     private NodoG<Casilla> getStartLowCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
-            if (nodo.getElemento().getFila() == ULTIMA_FILA)
-                if (nodo.getElemento().getColumna() == 0) return nodo;
+            if (playerIdentifier == Jugador.PlayerIdentifier.A) {
+                if (nodo.getElemento().getFila() == ULTIMA_FILA)
+                    if (nodo.getElemento().getColumna() == 0) return nodo;
+            } else {
+                if (nodo.getElemento().getFila() == ULTIMA_FILA)
+                    if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            }
         }
         return null;
     }
 
     private NodoG<Casilla> getStartCenter(){
         for (NodoG<Casilla> nodo : map.getNodos()){
-            if (nodo.getElemento().getFila() == FILA_CENTRAL)
-                if (nodo.getElemento().getColumna() == 0) return nodo;
+            if (playerIdentifier == Jugador.PlayerIdentifier.A) {
+                if (nodo.getElemento().getFila() == FILA_CENTRAL)
+                    if (nodo.getElemento().getColumna() == 0) return nodo;
+            } else {
+                if (nodo.getElemento().getFila() == FILA_CENTRAL)
+                    if (nodo.getElemento().getColumna() == ULTIMA_COLUMNA) return nodo;
+            }
+
         }
         return null;
     }
 
     public ArrayList<NodoG<Casilla>> getPath() {
         return path;
+    }
+
+
+    public NodoG<Casilla> getActualPosition() {
+        return actualPosition;
+    }
+
+    public void setActualPosition(NodoG<Casilla> actualPosition) {
+        this.actualPosition = actualPosition;
+    }
+    
+    public Runnable getMovimiento() {
+    	return movimiento;
     }
 
     public ArrayList<Character> getSoldiers() {
@@ -156,18 +208,7 @@ public class Peloton implements IConstants {
         return goal;
     }
 
-    public NodoG<Casilla> getActualPosition() {
-        return actualPosition;
-    }
 
-    public void setActualPosition(NodoG<Casilla> actualPosition) {
-        this.actualPosition = actualPosition;
-    }
-    
-    public Runnable getMovimiento() {
-    	return movimiento;
-    }
-    
     private void run() {
     	try {
 			Thread.sleep(1000);

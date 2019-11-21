@@ -3,15 +3,13 @@ package estructuras.AlgoritmosDeBusqueda.Subclasses;
 import estructuras.Arco;
 import estructuras.NodoG;
 
-public class ElementoDeMatriz<T> implements Comparable<ElementoDeMatriz<T>>{
-    private NodoG<T> nodoOrigen;
-    private NodoG<T> nodoDestino;
-    private NodoG<T> nodoAnterior;
+public class ElementoDeMatriz {
+    private NodoG nodoOrigen;
+    private NodoG nodoDestino;
 
-    public ElementoDeMatriz(NodoG<T> pNodoOrigen, NodoG<T> pNodoDestino) {
+    public ElementoDeMatriz(NodoG pNodoOrigen, NodoG pNodoDestino) {
         this.nodoOrigen = pNodoOrigen;
         this.nodoDestino = pNodoDestino;
-        nodoAnterior = null;
     }
     
     public ElementoDeMatriz(NodoG<T> pNodoOrigen, NodoG<T> pNodoDestino, NodoG<T> pNodoAanterior) {
@@ -20,33 +18,12 @@ public class ElementoDeMatriz<T> implements Comparable<ElementoDeMatriz<T>>{
         nodoAnterior = pNodoAanterior;
     }
 
-    public NodoG<T> getNodoOrigen() {
+    public NodoG getNodoOrigen() {
         return nodoOrigen;
     }
 
-	public NodoG<T> getNodoDestino() {
+	public NodoG getNodoDestino() {
 		return nodoDestino;
-	}
-	
-	protected void setNodoDestino(NodoG<T> pNodoDestino) {
-		nodoDestino = pNodoDestino;
-	}
-	
-	public NodoG<T> getNodoAnterior(){
-		return nodoAnterior;
-	}
-	
-	protected void setNodoAnterior(NodoG<T> pNodoAnterior){
-		nodoAnterior = pNodoAnterior;
-	}
-
-	@Override
-	public int compareTo(ElementoDeMatriz<T> pComparado) {
-		if((nodoOrigen == pComparado.getNodoOrigen()) && (nodoDestino == pComparado.getNodoDestino())){
-			return 0;
-		}else {
-			return -1;
-		}
 	}
 
 }
