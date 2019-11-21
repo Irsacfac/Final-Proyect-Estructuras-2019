@@ -78,7 +78,10 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 				for(int posFin = 0; posFin < todosNodos.size(); posFin++) {
 					nodoFin = todosNodos.get(posFin);
 					if((tablaHash.get(nodoInicio.getId() +"-"+ nodoConector.getId()) != null) && (tablaHash.get(nodoConector.getId() +"-"+ nodoFin.getId()) != null)){
-						tablaHash.put(nodoInicio.getId() +"-"+ nodoFin.getId(), new ElementoDeMatriz<>(nodoInicio, nodoFin, nodoConector));
+						if(nodoInicio.getId().compareTo(nodoConector.getId())!=0 && nodoFin.getId().compareTo(nodoConector.getId())!=0 ){
+							tablaHash.put(nodoInicio.getId() +"-"+ nodoFin.getId(), new ElementoDeMatriz<>(nodoInicio, nodoFin, nodoConector));
+						}
+						
 					}
 					if(tablaHash.get(ruta) != null) {
 						return;
