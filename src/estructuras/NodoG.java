@@ -43,4 +43,8 @@ public class NodoG <T>{
 	public T getElemento() {
 		return elemento;
 	}
+	
+	public String getId() {
+		return id.toString();
+	}
 }

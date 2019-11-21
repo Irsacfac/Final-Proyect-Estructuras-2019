@@ -13,6 +13,12 @@ public class ElementoDeMatriz<T> implements Comparable<ElementoDeMatriz<T>>{
         this.nodoDestino = pNodoDestino;
         nodoAnterior = null;
     }
+    
+    public ElementoDeMatriz(NodoG<T> pNodoOrigen, NodoG<T> pNodoDestino, NodoG<T> pNodoAanterior) {
+    	this.nodoOrigen = pNodoOrigen;
+        this.nodoDestino = pNodoDestino;
+        nodoAnterior = pNodoAanterior;
+    }
 
     public NodoG<T> getNodoOrigen() {
         return nodoOrigen;
