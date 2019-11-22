@@ -48,11 +48,25 @@ public class Peloton implements IConstants, Subject {
         if (path.get(0) != start) {
             Collections.reverse(path);
         }
+        movimiento = new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				move();
+			}
+		};
     }
 
-    private void move(){
-        actualPosition = path.get(0);
-        path.remove(0);
+    protected void move(){
+    	//System.out.println("Movimiento");
+    	try {
+    		actualPosition = path.get(0);
+            path.remove(0);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return;
+		}
     }
 
 
@@ -218,12 +232,4 @@ public class Peloton implements IConstants, Subject {
         return goal;
     }
 
-    private void run() {
-    	try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
 }
