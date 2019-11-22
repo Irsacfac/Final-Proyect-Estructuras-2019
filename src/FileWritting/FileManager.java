@@ -24,7 +24,6 @@ public class FileManager {
         }
     }
 
-    public Object deserialize(String filename)
 
     public static FileManager getInstance() {
         if (mInstance == null) {

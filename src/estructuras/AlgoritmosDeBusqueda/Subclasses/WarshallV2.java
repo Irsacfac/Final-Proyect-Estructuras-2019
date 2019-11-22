@@ -50,12 +50,7 @@ public class WarshallV2 extends AlgoritmoDeBusqueda {
                         String kj = kID + "-" + jID;
 
 
-
-
                         if (!exists(ij) && !exists(ji) && exists(ik) && exists(kj)){
-                            System.out.println("i " + ((NodoG<Casilla>)i).getElemento().getColumna() + "-" + ((NodoG<Casilla>)i).getElemento().getFila());
-                            System.out.println("j " + ((NodoG<Casilla>)j).getElemento().getColumna() + "-" + ((NodoG<Casilla>)j).getElemento().getFila());
-                            System.out.println("k " + ((NodoG<Casilla>)k).getElemento().getColumna() + "-" + ((NodoG<Casilla>)k).getElemento().getFila());
 
                             hashtable.put(ij, new MatrixElementV2(((NodoG)i),((NodoG)k),((NodoG)j)));
                             hashtable.put(ji, new MatrixElementV2(((NodoG)j),((NodoG)k),((NodoG)i)));
@@ -65,7 +60,6 @@ public class WarshallV2 extends AlgoritmoDeBusqueda {
                     }
 
                 }
-
         System.out.println("found a path");
     }
 

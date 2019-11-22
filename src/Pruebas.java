@@ -5,6 +5,7 @@ import estructuras.NodoG;
 import gui.Juego;
 import gui.LogIn;
 import gui.Menu;
+import juego.CaptureFlag;
 import juego.Jugador;
 import java.util.ArrayList;
 
@@ -42,6 +43,10 @@ public class Pruebas {
 
         new Juego(map);
 
+        CaptureFlag game = new CaptureFlag("C:\\Users\\jguty\\OneDrive\\Documents\\GitHub\\Final-Proyect-Estructuras-2019\\src\\MapHandling\\Mapas\\mapa2.json", player1, player1);
+        while (true){
+            game.turno();
+        }
     }
 }
 

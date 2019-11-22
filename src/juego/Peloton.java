@@ -70,6 +70,8 @@ public class Peloton implements IConstants, Subject {
     }
 
 
+
+
     @Override
     public void detach(Observer observer) {
 

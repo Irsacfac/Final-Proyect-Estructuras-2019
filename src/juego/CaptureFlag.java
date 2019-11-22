@@ -29,11 +29,10 @@ public class CaptureFlag implements IConstants {
 	}
 	
 	public void turno() {
-		Jugador jugadorActual = jugadores[turnoActual%2];
+		Jugador jugadorActual = jugadores[0];
 		Peloton[] pelotones = jugadorActual.getPelotones();
 		for(int numPeloton = 0;numPeloton < pelotones.length; numPeloton++) {
 			hilos.ejecutar(pelotones[numPeloton].getMovimiento());
-			
 		}
 		try {
 			Thread.sleep(1000);
@@ -41,8 +40,8 @@ public class CaptureFlag implements IConstants {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ventana.update(jugadorActual);
 		turnoActual++;
 	}
-	
+
+
 }

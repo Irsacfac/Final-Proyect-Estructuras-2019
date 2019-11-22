@@ -104,11 +104,11 @@ public class Juego extends JFrame implements IConstants, Observer {
     @Override
     public void update(Object object) {
         if (object instanceof Jugador) {
-            playerX = (Jugador) object;
+            actualPlayer = (Jugador) object;
             Peloton peloton;
             Casilla casillaPeloton;
-            for (int pelotonActual = 0; pelotonActual < playerX.getPelotones().length; pelotonActual++) {
-                peloton = playerX.getPelotones()[pelotonActual];
+            for (int pelotonActual = 0; pelotonActual < actualPlayer.getPelotones().length; pelotonActual++) {
+                peloton = actualPlayer.getPelotones()[pelotonActual];
                 casillaPeloton = peloton.getActualPosition().getElemento();
                 JPanel aActualizar = getCasilla(casillaPeloton.getX1(), casillaPeloton.getY1());
                 aActualizar.setBackground(Color.red);
