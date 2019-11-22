@@ -16,6 +16,7 @@ import MapHandling.Mapa;
 import MapHandling.Obstaculo;
 import estructuras.NodoG;
 import juego.Jugador;
+import juego.Peloton;
 import juego.Observer.Observer;
 import otros.IConstants;
 
@@ -25,8 +26,8 @@ public class Juego extends JFrame implements IConstants, Observer {
     private Mapa map;
     private ArrayList<JPanel> obstacles;
     private ArrayList<JPanel> grid;
-    private Jugador player1;
-    private Jugador player2;
+    private Jugador playerX;
+    //private Jugador player2;
 
 
     public Juego(Mapa map) {
@@ -44,6 +45,7 @@ public class Juego extends JFrame implements IConstants, Observer {
         initComponents();
 
         this.setVisible(true);
+        playerX = null;
     }
 
     private void setObstacles(){
@@ -85,11 +87,22 @@ public class Juego extends JFrame implements IConstants, Observer {
     }
 
     public void paint(Graphics g) {
-    	
+    	Peloton peloton;
+    	Casilla casillaPeloton;
+    	if(playerX != null) {
+	    	for(int pelotonActual = 0; pelotonActual < playerX.getPelotones().length; pelotonActual++) {
+	    		peloton = playerX.getPelotones()[pelotonActual];
+	    		casillaPeloton = peloton.getActualPosition().getElemento();
+	    		g.fillRect(casillaPeloton.getX1(), casillaPeloton.getY1(), casillaPeloton.getX2(), casillaPeloton.getY2());
+	    	}
+    	}
     }
 
     @Override
     public void update(Object object) {
+    	if(object instanceof Jugador) {
+    		playerX = (Jugador) object;
+    	}
     	repaint();
     }
 }
