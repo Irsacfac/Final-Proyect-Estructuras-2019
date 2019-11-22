@@ -39,13 +39,13 @@ public class CaptureFlag implements IConstants {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			jugadorActual.getGrupo2().setGoalPoint(CENTER);
+			/*jugadorActual.getGrupo2().setGoalPoint(CENTER);
 	        ArrayList<NodoG<Casilla>> path2 = jugadorActual.getGrupo2().getPath();
 	        System.out.println("\n");
 	        System.out.println("Capture Flag");
 	        for (NodoG<Casilla> nodo : path2){
 	            System.out.println(nodo.getElemento().getFila()+"-"+nodo.getElemento().getColumna()+ "\n");
-	        }
+	        }*/
 			
 		}
 		

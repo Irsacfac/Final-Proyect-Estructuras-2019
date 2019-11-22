@@ -58,7 +58,7 @@ public class Peloton implements IConstants, Subject {
     }
 
     protected void move(){
-    	System.out.println("Movimiento");
+    	//System.out.println("Movimiento");
     	try {
     		actualPosition = path.get(0);
             path.remove(0);
