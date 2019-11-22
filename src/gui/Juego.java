@@ -84,9 +84,12 @@ public class Juego extends JFrame implements IConstants, Observer {
         }
     }
 
+    public void paint(Graphics g) {
+    	
+    }
 
     @Override
     public void update(Object object) {
-
+    	repaint();
     }
 }
