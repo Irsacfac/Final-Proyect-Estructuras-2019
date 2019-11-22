@@ -1,8 +1,6 @@
 package FileWritting;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class FileManager {
 
@@ -10,6 +8,7 @@ public class FileManager {
     private static FileManager mInstance;
 
     private FileManager() {
+    	
     }
 
     public void serialize(Object object, String filename){
@@ -24,7 +23,21 @@ public class FileManager {
         }
     }
 
-    public Object deserialize(String filename)
+    public Object deserialize(String filename) {
+    	return null;
+    }
+    
+    public void ordenar(String filename) {
+    	
+    }
+    
+    private void distribuir() {
+    	
+    }
+    
+    private void mezclar() {
+    	
+    }
 
     public static FileManager getInstance() {
         if (mInstance == null) {
