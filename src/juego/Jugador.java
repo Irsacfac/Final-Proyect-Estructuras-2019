@@ -25,7 +25,7 @@ public class Jugador implements IConstants {
 
 		nombre = pNombre;
 		pelotones = new Peloton[]{new Peloton(PosiblePoints.TOPCORNER, pDestino1, Peloton.posibleAlgorithms.DIJKSTRA, map, pAorB),
-				                  new Peloton(PosiblePoints.TOPCORNER, pDestino2, Peloton.posibleAlgorithms.WARSHALL, map, pAorB),
+				                  new Peloton(PosiblePoints.LOWCORNER, pDestino2, Peloton.posibleAlgorithms.WARSHALL, map, pAorB),
 						          new Peloton(PosiblePoints.LOWCORNER, pDestino3, Peloton.posibleAlgorithms.MST, map, pAorB)};
 		grupo1 = pelotones[0];
 		grupo2 = pelotones[1];
@@ -57,13 +57,6 @@ public class Jugador implements IConstants {
 		setFlagNode(flagRow, flagColumn);
 	}
 
-	public void setGoals(PosiblePoints pGroup1Goal, PosiblePoints pGroup2Goal, PosiblePoints pGroup3Goal){
-
-		grupo1.setGoalPoint(pGroup1Goal);
-		grupo2.setGoalPoint(pGroup2Goal);
-		grupo3.setGoalPoint(pGroup3Goal);
-
-	}
 
 	public boolean won(){
 		return grupo1.getActualPosition().getElemento().isFlagLocation() ||
