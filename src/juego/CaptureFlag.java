@@ -33,22 +33,14 @@ public class CaptureFlag implements IConstants {
 		Peloton[] pelotones = jugadorActual.getPelotones();
 		for(int numPeloton = 0;numPeloton < pelotones.length; numPeloton++) {
 			hilos.ejecutar(pelotones[numPeloton].getMovimiento());
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			/*jugadorActual.getGrupo2().setGoalPoint(CENTER);
-	        ArrayList<NodoG<Casilla>> path2 = jugadorActual.getGrupo2().getPath();
-	        System.out.println("\n");
-	        System.out.println("Capture Flag");
-	        for (NodoG<Casilla> nodo : path2){
-	            System.out.println(nodo.getElemento().getFila()+"-"+nodo.getElemento().getColumna()+ "\n");
-	        }*/
 			
 		}
-		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ventana.update(jugadorActual);
 		turnoActual++;
 	}

@@ -4,6 +4,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -26,8 +27,9 @@ public class Juego extends JFrame implements IConstants, Observer {
     private Mapa map;
     private ArrayList<JPanel> obstacles;
     private ArrayList<JPanel> grid;
-    private Jugador playerX;
-    //private Jugador player2;
+    private Jugador actualPlayer;
+    private Jugador previousPlayer;
+    //private Image imageBuffer;
 
 
     public Juego(Mapa map) {
@@ -45,7 +47,7 @@ public class Juego extends JFrame implements IConstants, Observer {
         initComponents();
 
         this.setVisible(true);
-        playerX = null;
+        actualPlayer = null;
     }
 
     private void setObstacles() {
@@ -122,4 +124,5 @@ public class Juego extends JFrame implements IConstants, Observer {
         }
         return null;
     }
+  
 }
