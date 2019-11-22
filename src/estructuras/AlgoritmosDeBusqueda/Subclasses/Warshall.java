@@ -73,13 +73,18 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		ElementoDeMatriz<T> actualDestino;
 		for(int posNodoInicio = 0; posNodoInicio < todosNodos.size(); posNodoInicio++) {
 			nodoInicio = todosNodos.get(posNodoInicio);
+			System.out.println("Inicio: " + nodoInicio.getElemento());
 			for(int posConector = 0; posConector < todosNodos.size(); posConector++) {
 				nodoConector = todosNodos.get(posConector);
+				System.out.println("Conector: " + nodoConector.getElemento());
 				for(int posFin = 0; posFin < todosNodos.size(); posFin++) {
 					nodoFin = todosNodos.get(posFin);
+					System.out.println("Fin: " + nodoFin.getElemento());
 					if((tablaHash.get(nodoInicio.getId() +"-"+ nodoConector.getId()) != null) && (tablaHash.get(nodoConector.getId() +"-"+ nodoFin.getId()) != null)){
-						if(nodoInicio.getId().compareTo(nodoConector.getId())!=0 && nodoFin.getId().compareTo(nodoConector.getId())!=0 ){
+						
+						if(nodoInicio.getId().compareTo(nodoConector.getId())!=0 && nodoFin.getId().compareTo(nodoInicio.getId())!=0 ){
 							tablaHash.put(nodoInicio.getId() +"-"+ nodoFin.getId(), new ElementoDeMatriz<>(nodoInicio, nodoFin, nodoConector));
+							System.out.println("Conneccion agregada: " + "Inicio: " + nodoInicio.getElemento() + ", Fin: " + nodoFin.getElemento() + ", Conector: " + nodoConector.getElemento());
 						}
 						
 					}
@@ -139,18 +144,23 @@ public class Warshall<T> extends AlgoritmoDeBusqueda {
 		Vector<T> actual = new Vector<>();
 		//ElementoDeMatriz<T> elementoActual = ruta;
 		int contador;
+		NodoG<T> nodoDebug;
+		String tempRuta;
 		Stack<NodoG<T>> pila = new Stack<>();
 		ArrayList<NodoG<T>> camino = new ArrayList<>();
 		pila.push(tablaHash.get(ruta).getNodoDestino());
 		camino.add(tablaHash.get(ruta).getNodoDestino());
 		System.out.println("Primer elemento: " + tablaHash.get(ruta).getNodoDestino().getElemento());
 		while(tablaHash.get(ruta).getNodoAnterior() != null) {
+			System.out.println("Origen elemento: " + tablaHash.get(ruta).getNodoOrigen().getElemento());
 			System.out.println("Siguiente elemento: " + tablaHash.get(ruta).getNodoAnterior().getElemento());
+			System.out.println("Actual elemento: " + tablaHash.get(ruta).getNodoDestino().getElemento());
 			pila.push(tablaHash.get(ruta).getNodoAnterior());
 			camino.add(tablaHash.get(ruta).getNodoAnterior());
-			ruta = nodoParada.getId() +"-"+ tablaHash.get(ruta).getNodoAnterior().getId();
+			tempRuta = nodoParada.getId() +"-"+ tablaHash.get(ruta).getNodoAnterior().getId();
+			ruta = tempRuta;
 		}
-		camino.add(tablaHash.get(ruta).getNodoOrigen());
+		camino.add(nodoParada);
 		/*while(!pila.empty()) {
 			camino.add(pila.pop());
 		}*/
