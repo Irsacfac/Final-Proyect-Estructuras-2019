@@ -4,6 +4,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -26,8 +27,9 @@ public class Juego extends JFrame implements IConstants, Observer {
     private Mapa map;
     private ArrayList<JPanel> obstacles;
     private ArrayList<JPanel> grid;
-    private Jugador playerX;
-    //private Jugador player2;
+    private Jugador actualPlayer;
+    private Jugador previousPlayer;
+    //private Image imageBuffer;
 
 
     public Juego(Mapa map) {
@@ -45,7 +47,7 @@ public class Juego extends JFrame implements IConstants, Observer {
         initComponents();
 
         this.setVisible(true);
-        playerX = null;
+        actualPlayer = null;
     }
 
     private void setObstacles(){
@@ -86,23 +88,38 @@ public class Juego extends JFrame implements IConstants, Observer {
         }
     }
 
-    public void paint(Graphics g) {
+    /*public void paint(Graphics g) {
     	Peloton peloton;
     	Casilla casillaPeloton;
+    	if (imageBuffer == null) {
+    		imageBuffer = this.createImage(PANTALLA_JUEGO_ANCHURA, PANTALLA_JUEGO_ALTURA);
+    	}
     	if(playerX != null) {
+    		g.drawImage(imageBuffer, 0, 0, null);
 	    	for(int pelotonActual = 0; pelotonActual < playerX.getPelotones().length; pelotonActual++) {
 	    		peloton = playerX.getPelotones()[pelotonActual];
 	    		casillaPeloton = peloton.getActualPosition().getElemento();
 	    		g.fillRect(casillaPeloton.getX1(), casillaPeloton.getY1(), casillaPeloton.getX2(), casillaPeloton.getY2());
 	    	}
     	}
-    }
+    }*/
 
     @Override
     public void update(Object object) {
+    	previousPlayer = actualPlayer;
     	if(object instanceof Jugador) {
-    		playerX = (Jugador) object;
+    		actualPlayer = (Jugador) object;
     	}
-    	repaint();
+    	else {
+    		return;
+    	}
+    	for(int pos = 0; pos < actualPlayer.getPelotones().length; pos++) {
+    		grid.get(actualPlayer.getPelotones()[pos].getActualPosition().getElemento().getFila()*actualPlayer.getPelotones()[pos].getActualPosition().getElemento().getColumna()).setBackground(Color.BLUE);
+    		if(previousPlayer != null) {
+    			grid.get(previousPlayer.getPelotones()[pos].getActualPosition().getElemento().getFila()*previousPlayer.getPelotones()[pos].getActualPosition().getElemento().getColumna()).setBackground(Color.WHITE);
+    		}
+    	}
+    	//repaint();
     }
+  
 }
