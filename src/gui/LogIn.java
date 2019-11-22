@@ -1,9 +1,13 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import FileWritting.FileManager;
+import juego.User;
 import otros.IConstants;
 
 public class LogIn extends JFrame implements IConstants {
@@ -15,6 +19,7 @@ public class LogIn extends JFrame implements IConstants {
 	private JPanel panelLogIn;
 	private JLabel passwordLabel;
 	private JLabel mailLabel;
+
 
 	public LogIn() {
 		super("Capturar la bandera");
@@ -64,7 +69,33 @@ public class LogIn extends JFrame implements IConstants {
 		botonRegister = new JButton("Registrar");
 		botonRegister.setBounds(REGISTER_BOTTON_X, REGISTER_BOTTON_Y, DEFAULT_BUTTON_ANCHURA, DEFAULT_BUTTON_ALTURA);
 		panelLogIn.add(botonRegister);
+		botonRegister.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				botonRegisterActionPerformed();
+			}
+		});
+	}
 
+	private void botonRegisterActionPerformed() {
+		User newUser = new User();
+		newUser.setEmail(setCharArray(mailLabel.getText(), newUser.getEmail().length));
+		newUser.setPassword(setCharArray(mailLabel.getText(), newUser.getPassword().length));
+		FileManager.getInstance().serialize(newUser, "userdata.txt");
 
 	}
+
+	private char[] setCharArray(String string, int size){
+		char[] array = new char[size];
+		for (int i = 0 ; i < size ; i++){
+			try{
+				array[i] = string.charAt(i);
+			} catch (Exception e){
+				array[i] = ' ';
+			}
+		}
+		return array;
+	}
+
+
 }

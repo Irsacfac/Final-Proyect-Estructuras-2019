@@ -9,8 +9,8 @@ public class User implements Serializable {
     private int pointsEarned;
 
     public User() {
-        email = new char[20];
-        password = new char[100];
+        email = new char[100];
+        password = new char[20];
         pointsEarned = 0;
     }
 

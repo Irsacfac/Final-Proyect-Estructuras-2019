@@ -18,7 +18,7 @@ public class Pruebas {
         Mapa map = new Mapa("C:\\Users\\jguty\\OneDrive\\Documents\\GitHub\\Final-Proyect-Estructuras-2019\\src\\MapHandling\\Mapas\\mapa2.json");
         Jugador player1 = new Jugador("Prueba", map.getMapa(), CENTER, A, TOPCORNER, CENTER, TOPCORNER);
 
-
+        new LogIn();
 
         ArrayList<NodoG<Casilla>> path1 = player1.getGrupo1().getPath();
         System.out.println("Dijkstra");

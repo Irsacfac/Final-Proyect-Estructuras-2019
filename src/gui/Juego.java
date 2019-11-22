@@ -48,10 +48,10 @@ public class Juego extends JFrame implements IConstants, Observer {
         playerX = null;
     }
 
-    private void setObstacles(){
+    private void setObstacles() {
         obstacles = new ArrayList<>();
         ArrayList<Obstaculo> obstacleObjects = map.getObstaculos();
-        for (Obstaculo obstaculo : obstacleObjects){
+        for (Obstaculo obstaculo : obstacleObjects) {
             int width = obstaculo.getWidth();
             int height = obstaculo.getHeight();
             JPanel obstaclePanel = new JPanel();
@@ -61,10 +61,10 @@ public class Juego extends JFrame implements IConstants, Observer {
         }
     }
 
-    private void setCasillas(){
+    private void setCasillas() {
         grid = new ArrayList<>();
         ArrayList<NodoG<Casilla>> nodes = map.getMapa().getNodos();
-        for (NodoG<Casilla> nodoG : nodes){
+        for (NodoG<Casilla> nodoG : nodes) {
             Casilla gridObject = nodoG.getElemento();
             JPanel gridPanel = new JPanel();
             gridPanel.setBounds(gridObject.getX1(), gridObject.getY1(), ANCHO_CASILLA, ALTURA_CASILLA);
@@ -78,31 +78,48 @@ public class Juego extends JFrame implements IConstants, Observer {
         panelJuego.setBounds(0, 0, PANTALLA_JUEGO_ANCHURA, PANTALLA_JUEGO_ALTURA);
         panelJuego.setLayout(null);
         this.getContentPane().add(panelJuego);
-        for (JPanel obstaculo : obstacles){
+        for (JPanel obstaculo : obstacles) {
             panelJuego.add(obstaculo);
         }
-        for (JPanel grid : grid){
+        for (JPanel grid : grid) {
             panelJuego.add(grid);
         }
     }
 
-    public void paint(Graphics g) {
-    	Peloton peloton;
-    	Casilla casillaPeloton;
-    	if(playerX != null) {
-	    	for(int pelotonActual = 0; pelotonActual < playerX.getPelotones().length; pelotonActual++) {
-	    		peloton = playerX.getPelotones()[pelotonActual];
-	    		casillaPeloton = peloton.getActualPosition().getElemento();
-	    		g.fillRect(casillaPeloton.getX1(), casillaPeloton.getY1(), casillaPeloton.getX2(), casillaPeloton.getY2());
-	    	}
-    	}
-    }
+//    public void paint(Graphics g) {
+//    	Peloton peloton;
+//    	Casilla casillaPeloton;
+//    	print(g);
+//    	if(playerX != null) {
+//	    	for(int pelotonActual = 0; pelotonActual < playerX.getPelotones().length; pelotonActual++) {
+//	    		peloton = playerX.getPelotones()[pelotonActual];
+//	    		casillaPeloton = peloton.getActualPosition().getElemento();
+//	    		g.fillRect(casillaPeloton.getX1(), casillaPeloton.getY1(), casillaPeloton.getX2(), casillaPeloton.getY2());
+//	    	}
+//    	}
+//    }
 
     @Override
     public void update(Object object) {
-    	if(object instanceof Jugador) {
-    		playerX = (Jugador) object;
-    	}
-    	repaint();
+        if (object instanceof Jugador) {
+            playerX = (Jugador) object;
+            Peloton peloton;
+            Casilla casillaPeloton;
+            for (int pelotonActual = 0; pelotonActual < playerX.getPelotones().length; pelotonActual++) {
+                peloton = playerX.getPelotones()[pelotonActual];
+                casillaPeloton = peloton.getActualPosition().getElemento();
+                JPanel aActualizar = getCasilla(casillaPeloton.getX1(), casillaPeloton.getY1());
+                aActualizar.setBackground(Color.red);
+
+            }
+        }
+    }
+
+    private JPanel getCasilla(int x1, int y1){
+        for (JPanel panel : grid){
+            panel.setBackground(Color.WHITE);
+            if (panel.getAlignmentX() == x1 && panel.getAlignmentY() == y1) return panel;
+        }
+        return null;
     }
 }
