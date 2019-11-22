@@ -1,7 +1,4 @@
-import estructuras.AlgoritmosDeBusqueda.Subclasses.Dijkstra;
-import estructuras.AlgoritmosDeBusqueda.Subclasses.ElementoTablaD;
-import estructuras.AlgoritmosDeBusqueda.Subclasses.MST;
-import estructuras.AlgoritmosDeBusqueda.Subclasses.Warshall;
+import estructuras.AlgoritmosDeBusqueda.Subclasses.*;
 import estructuras.Arco;
 import estructuras.GrafoND;
 import estructuras.NodoG;
@@ -26,17 +23,18 @@ public class Pruebas2 {
         prueba.agregarNodo(nodoE);
 
         prueba.agregarArco( 2,nodoA,nodoB);
-        prueba.agregarArco( 3,nodoA, nodoD);
-        prueba.agregarArco( 1,nodoA, nodoC);
+        prueba.agregarArco( 1,nodoB, nodoC);
         prueba.agregarArco( 1,nodoC, nodoD);
-        prueba.agregarArco( 3,nodoC, nodoB);
-        prueba.agregarArco( 4,nodoD, nodoB);
-        prueba.agregarArco( 2,nodoD, nodoE);
-        prueba.agregarArco( 1,nodoB, nodoE);
+        prueba.agregarArco( 3,nodoD, nodoE);
+        prueba.agregarArco( 3,nodoD, nodoB);
+        prueba.agregarArco( 3,nodoC, nodoA);
+        prueba.agregarArco( 3,nodoE, nodoD);
+        prueba.agregarArco( 3,nodoD, nodoA);
+        prueba.agregarArco( 3,nodoD, nodoC);
 
         System.out.println( "Cantidad de Arcos " + prueba.getArcos().size());
 
-        Warshall d = new Warshall(prueba, nodoA, nodoE);
+        WarshallV2 d = new WarshallV2(prueba, nodoA, nodoE);
 //        ArrayList<Arco> algoritmo = mst.algoritmoMST(prueba);
 //        for (Arco arco : algoritmo){
 //            System.out.println(arco.getPuntoA().getElemento()+""+arco.getPuntoB().getElemento());

@@ -5,6 +5,7 @@ import estructuras.AlgoritmosDeBusqueda.AlgoritmoDeBusqueda;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.Dijkstra;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.MST;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.Warshall;
+import estructuras.AlgoritmosDeBusqueda.Subclasses.WarshallV2;
 import estructuras.GrafoND;
 import estructuras.NodoG;
 import juego.Observer.Observer;
@@ -93,7 +94,7 @@ public class Peloton implements IConstants, Subject {
                 this.strategy = (AlgoritmoDeBusqueda<Casilla>) new MST();
                 break;
             case WARSHALL:
-                this.strategy = (AlgoritmoDeBusqueda<Casilla>) (AlgoritmoDeBusqueda<Casilla>) new MST();
+                this.strategy = (AlgoritmoDeBusqueda<Casilla>) new WarshallV2(map, start, goal);
                 break;
         }
     }
