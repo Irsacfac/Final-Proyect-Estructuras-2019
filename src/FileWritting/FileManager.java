@@ -41,6 +41,7 @@ public class FileManager {
     	while(longSec < numReg) {
     		distribuir(archivo, f1, f2, longSec, numReg);
     		mezclar(f1,f2, archivo, longSec, numReg);
+    		longSec *= 2;
     	}
     }
     
