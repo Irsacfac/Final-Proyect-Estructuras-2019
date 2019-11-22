@@ -7,14 +7,20 @@ import java.util.ArrayList;
 public class Mapa {
 
     private GrafoND<Casilla> mapa;
-    private GeneradorDeMapas generador;
+    private ArrayList<Obstaculo> obstaculos;
 
     public Mapa(String jsonMapPath) {
-        this.generador = new GeneradorDeMapas(jsonMapPath);
+        GeneradorDeMapas generador = new GeneradorDeMapas(jsonMapPath);
         mapa =  generador.getGeneratingMap();
+        obstaculos = generador.getObstacles();
     }
 
     public GrafoND<Casilla> getMapa() {
         return mapa;
     }
+
+    public ArrayList<Obstaculo> getObstaculos() {
+        return obstaculos;
+    }
+
 }

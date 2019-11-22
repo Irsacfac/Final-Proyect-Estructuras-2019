@@ -17,7 +17,7 @@ public class CaptureFlag implements IConstants {
 		jugadores = new Jugador[] {pJugador1, pJugador2};
 		mapa = new Mapa(mapPath);
 		hilos = new Hilos(CANT_HILOS);
-		ventana = new Juego();
+		ventana = new Juego(mapa);
 	}
 	
 	public void turno() {

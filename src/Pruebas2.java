@@ -1,6 +1,7 @@
 import estructuras.AlgoritmosDeBusqueda.Subclasses.Dijkstra;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.ElementoTablaD;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.MST;
+import estructuras.AlgoritmosDeBusqueda.Subclasses.Warshall;
 import estructuras.Arco;
 import estructuras.GrafoND;
 import estructuras.NodoG;
@@ -35,16 +36,16 @@ public class Pruebas2 {
 
         System.out.println( "Cantidad de Arcos " + prueba.getArcos().size());
 
-        MST mst = new MST();
+        Warshall d = new Warshall(prueba, nodoA, nodoE);
 //        ArrayList<Arco> algoritmo = mst.algoritmoMST(prueba);
 //        for (Arco arco : algoritmo){
 //            System.out.println(arco.getPuntoA().getElemento()+""+arco.getPuntoB().getElemento());
 //        }
 
-        ArrayList<NodoG> path = mst.getPath(nodoB, nodoE, prueba);
+        ArrayList path = d.getPath(nodoA, nodoE, prueba);
         System.out.println("\n"+"Final path");
-        for (NodoG nodo : path){
-            System.out.println(nodo.getElemento());
+        for (Object nodo : path){
+            System.out.println(((NodoG)nodo).getElemento());
         }
 
 

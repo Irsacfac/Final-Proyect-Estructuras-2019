@@ -36,7 +36,6 @@ public class LogIn extends JFrame implements IConstants {
 		panelLogIn = new JPanel();
 		panelLogIn.setBounds(0, 0, PANTALLA_ANCHURA, PANTALLA_ALTURA);
 		panelLogIn.setLayout(null);
-		//panelLogIn.setBackground(Color.AQUAMARINE);
 		this.getContentPane().add(panelLogIn);
 
 		mailLabel = new JLabel();
@@ -48,8 +47,6 @@ public class LogIn extends JFrame implements IConstants {
 		mail.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mail.setBounds(USER_INPUT_X, USER_INPUT_Y, TEXTLABEL_ANCHURA, DEFAULT_BUTTON_ALTURA);
 		panelLogIn.add(mail);
-
-
 
 		passwordLabel = new JLabel();
 		passwordLabel.setText("password");

@@ -20,13 +20,16 @@ public class Jugador implements IConstants {
 	}
 
 	
-	public Jugador(String pNombre, GrafoND<Casilla> map, PosiblePoints pFlagLocation,PlayerIdentifier pAorB) {
+	public Jugador(String pNombre, GrafoND<Casilla> map, PosiblePoints pFlagLocation,PlayerIdentifier pAorB,
+				   PosiblePoints pDestino1, PosiblePoints pDestino2, PosiblePoints pDestino3) {
 
 		nombre = pNombre;
-		pelotones = new Peloton[]{new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map, pAorB), new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.WARSHALL, map, pAorB), new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.MST, map, pAorB)};
-		grupo1 = new Peloton(PosiblePoints.CENTER, Peloton.posibleAlgorithms.DIJKSTRA, map, pAorB);
-		grupo2 = new Peloton(PosiblePoints.TOPCORNER, Peloton.posibleAlgorithms.MST, map, pAorB);
-		grupo3 = new Peloton(PosiblePoints.LOWCORNER, Peloton.posibleAlgorithms.WARSHALL, map, pAorB);
+		pelotones = new Peloton[]{new Peloton(PosiblePoints.TOPCORNER, pDestino1, Peloton.posibleAlgorithms.DIJKSTRA, map, pAorB),
+				                  new Peloton(PosiblePoints.TOPCORNER, pDestino2, Peloton.posibleAlgorithms.WARSHALL, map, pAorB),
+						          new Peloton(PosiblePoints.LOWCORNER, pDestino3, Peloton.posibleAlgorithms.MST, map, pAorB)};
+		grupo1 = pelotones[0];
+		grupo2 = pelotones[1];
+		grupo3 =  pelotones[2];
 		this.map = map;
 		setFlag(pAorB, pFlagLocation);
 

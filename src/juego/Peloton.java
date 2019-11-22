@@ -7,6 +7,8 @@ import estructuras.AlgoritmosDeBusqueda.Subclasses.MST;
 import estructuras.AlgoritmosDeBusqueda.Subclasses.Warshall;
 import estructuras.GrafoND;
 import estructuras.NodoG;
+import juego.Observer.Observer;
+import juego.Observer.Subject;
 import otros.IConstants;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.Collections;
 
 import javax.swing.plaf.basic.BasicTreeUI.TreeHomeAction;
 
-public class Peloton implements IConstants {
+public class Peloton implements IConstants, Subject {
 
     private ArrayList<Character> soldiers;
     private GrafoND<Casilla> map;
@@ -33,12 +35,39 @@ public class Peloton implements IConstants {
     }
 
 
-    public Peloton(PosiblePoints startPoint, posibleAlgorithms strategy, GrafoND<Casilla> map, Jugador.PlayerIdentifier pAorB) {
+    public Peloton(PosiblePoints startPoint,PosiblePoints goalPoint, posibleAlgorithms strategy, GrafoND<Casilla> map, Jugador.PlayerIdentifier pAorB) {
         this.map = map;
+        playerIdentifier = pAorB;
         setStartPoint(startPoint);
+        setGoalPoint(goalPoint);
         setStrategy(strategy);
         actualPosition = start;
-        playerIdentifier = pAorB;
+
+        path = this.strategy.getPath(start, goal, map);
+        if (path.get(0) != start) {
+            Collections.reverse(path);
+        }
+    }
+
+    private void move(){
+        actualPosition = path.get(0);
+        path.remove(0);
+    }
+
+
+    @Override
+    public void detach(Observer observer) {
+
+    }
+
+    @Override
+    public void attach(Observer observer) {
+
+    }
+
+    @Override
+    public void notifyObservers(Observer observer) {
+
     }
 
     private void setStrategy(posibleAlgorithms strategy){
@@ -49,14 +78,24 @@ public class Peloton implements IConstants {
             case MST:
                 this.strategy = (AlgoritmoDeBusqueda<Casilla>) new MST();
                 break;
-//            case WARSHALL:
-//                Dijkstra dijkstra2 = new Dijkstra(start, map);
-//                this.strategy = (AlgoritmoDeBusqueda<Casilla>) dijkstra2;
-//                break;
+            case WARSHALL:
+                this.strategy = (AlgoritmoDeBusqueda<Casilla>) (AlgoritmoDeBusqueda<Casilla>) new MST();
+                break;
         }
     }
-
-
+    private void setStartPoint(PosiblePoints start){
+        switch (start){
+            case CENTER:
+                this.start = getStartCenter();
+                break;
+            case LOWCORNER:
+                this.start = getStartLowCorner();
+                break;
+            case TOPCORNER:
+                this.start = getStartTopCorner();
+                break;
+        }
+    }
     public void setGoalPoint(PosiblePoints posibleGoalPoint) {
         switch (posibleGoalPoint){
             case CENTER:
@@ -69,10 +108,8 @@ public class Peloton implements IConstants {
                 this.goal = getGoalTopCorner();
                 break;
         }
-        path = this.strategy.getPath(start, goal, map);
-        if (path.get(0) != start){
-            Collections.reverse(path);
-        }
+
+
     }
 
     private NodoG<Casilla> getGoalTopCorner() {
@@ -88,7 +125,6 @@ public class Peloton implements IConstants {
         }
         return null;
     }
-
     private NodoG<Casilla> getGoalLowCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (playerIdentifier == Jugador.PlayerIdentifier.B) {
@@ -101,7 +137,6 @@ public class Peloton implements IConstants {
         }
         return null;
     }
-
     private NodoG<Casilla> getGoalCenter() {
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (playerIdentifier == Jugador.PlayerIdentifier.B) {
@@ -114,21 +149,6 @@ public class Peloton implements IConstants {
         }
         return null;
     }
-
-    private void setStartPoint(PosiblePoints start){
-        switch (start){
-            case CENTER:
-                this.start = getStartCenter();
-                break;
-            case LOWCORNER:
-                this.start = getStartLowCorner();
-                break;
-            case TOPCORNER:
-                this.start = getStartTopCorner();
-                break;
-        }
-    }
-
     private NodoG<Casilla> getStartTopCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (playerIdentifier == Jugador.PlayerIdentifier.A)
@@ -143,7 +163,6 @@ public class Peloton implements IConstants {
         }
         return null;
     }
-
     private NodoG<Casilla> getStartLowCorner() {
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (playerIdentifier == Jugador.PlayerIdentifier.A) {
@@ -156,7 +175,6 @@ public class Peloton implements IConstants {
         }
         return null;
     }
-
     private NodoG<Casilla> getStartCenter(){
         for (NodoG<Casilla> nodo : map.getNodos()){
             if (playerIdentifier == Jugador.PlayerIdentifier.A) {
@@ -174,40 +192,30 @@ public class Peloton implements IConstants {
     public ArrayList<NodoG<Casilla>> getPath() {
         return path;
     }
-
-
     public NodoG<Casilla> getActualPosition() {
         return actualPosition;
     }
-
     public void setActualPosition(NodoG<Casilla> actualPosition) {
         this.actualPosition = actualPosition;
     }
-    
     public Runnable getMovimiento() {
     	return movimiento;
     }
-
     public ArrayList<Character> getSoldiers() {
         return soldiers;
     }
-
     public void setSoldiers(ArrayList<Character> soldiers) {
         this.soldiers = soldiers;
     }
-
     public AlgoritmoDeBusqueda<Casilla> getStrategy() {
         return strategy;
     }
-
     public NodoG<Casilla> getStart() {
         return start;
     }
-
     public NodoG<Casilla> getGoal() {
         return goal;
     }
-
 
     private void run() {
     	try {

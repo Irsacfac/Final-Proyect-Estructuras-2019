@@ -1,9 +1,15 @@
 package juego;
 
-public class Character {
+import juego.Observer.Observer;
+import juego.Observer.Subject;
+
+import java.util.ArrayList;
+
+public class Character implements Subject {
 	private int ataque;
 	private int tiempoEspera;
 	private int energia;
+	private ArrayList<Observer> observers;
 	
 	public Character() {
 		energia = 100;
@@ -26,5 +32,25 @@ public class Character {
 	}
 	public int getEnergia() {
 		return energia;
+	}
+
+	public void attack(Character target){
+		target.setEnergia(ataque);
+	}
+
+
+	@Override
+	public void detach(Observer observer) {
+
+	}
+
+	@Override
+	public void attach(Observer observer) {
+
+	}
+
+	@Override
+	public void notifyObservers(Observer observer) {
+
 	}
 }

@@ -23,7 +23,7 @@ public class GeneradorDeMapas implements IConstants {
         JSONArray jsonObstacles = (JSONArray)jsonMap.get("obstaculos");
         ArrayList<Obstaculo> obstacles = new ArrayList<>();
         for (int index = 0 ; index < jsonObstacles.size() ; index++){
-            JSONObject jsonObstacle = (JSONObject) jsonObstacles.get(0);
+            JSONObject jsonObstacle = (JSONObject) jsonObstacles.get(index);
             int x1 = Integer.parseInt((String)jsonObstacle.get("x1"));
             int y1 = Integer.parseInt((String)jsonObstacle.get("y1"));
             int x2 = Integer.parseInt((String)jsonObstacle.get("x2"));
@@ -105,14 +105,14 @@ public class GeneradorDeMapas implements IConstants {
     private boolean existsXIntersection(NodoG<Casilla> pNode, Obstaculo pObstacle){
         int nodeX1 = pNode.getElemento().getX1();
         int nodeX2 = pNode.getElemento().getX2();
-        return (isBetween(nodeX1, pObstacle.x1, nodeX2) || isBetween(nodeX1, pObstacle.x2, nodeX2) ||
-                isBetween(pObstacle.x1, nodeX1, pObstacle.x2) || isBetween(pObstacle.x1, nodeX2, pObstacle.x2));
+        return (isBetween(nodeX1, pObstacle.getX1(), nodeX2) || isBetween(nodeX1, pObstacle.getX2(), nodeX2) ||
+                isBetween(pObstacle.getX1(), nodeX1, pObstacle.getX2()) || isBetween(pObstacle.getX1(), nodeX2, pObstacle.getX2()));
     }
     private boolean existsYIntersection(NodoG<Casilla> pNode, Obstaculo pObstacle){
         int nodeY1 = pNode.getElemento().getY1();
         int nodeY2 = pNode.getElemento().getY2();
-        return (isBetween(nodeY1, pObstacle.y1, nodeY2) || isBetween(nodeY1, pObstacle.y2, nodeY2) ||
-                isBetween(pObstacle.y1, nodeY1, pObstacle.y2) || isBetween(pObstacle.y1, nodeY2, pObstacle.y2));
+        return (isBetween(nodeY1, pObstacle.getY1(), nodeY2) || isBetween(nodeY1, pObstacle.getY2(), nodeY2) ||
+                isBetween(pObstacle.getY1(), nodeY1, pObstacle.getY2()) || isBetween(pObstacle.getY1(), nodeY2, pObstacle.getY2()));
     }
     private boolean isBetween(int A, int B, int C){
         return (A <= B && B <= C);
