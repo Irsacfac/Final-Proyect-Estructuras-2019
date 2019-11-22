@@ -28,14 +28,27 @@ public class FileManager {
     }
     
     public void ordenar(String filename) {
+    	int cantReg;
+    	File archivo = new File(filename);
+    	int longSec;
+    	int numReg;
+    	File f1 = new File("ArchivoAux1");
+    	File f2 = new File("ArchivoAux2");
+    	
+    	cantReg = (int)archivo.length()/124;
+    	numReg = (int)archivo.length()/cantReg;
+    	longSec = 1;
+    	while(longSec < numReg) {
+    		distribuir(archivo, f1, f2, longSec, numReg);
+    		mezclar(f1,f2, archivo, longSec, numReg);
+    	}
+    }
+    
+    private void distribuir(File pArchivo, File pF1, File pF2, int pLongSec, int pNumReg) {
     	
     }
     
-    private void distribuir() {
-    	
-    }
-    
-    private void mezclar() {
+    private void mezclar(File pF1, File pF2, File pArchivo, int pLongSec, int pNumReg) {
     	
     }
 
